@@ -24,7 +24,7 @@ OBJ		= 	$(addprefix $(OBJDIR)/,$(SRC:.c=.o))
 BONUSOBJ =  $(addprefix $(BONOBJDIR)/,$(BONUS:.c=.o))
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -lreadline
 
 ARRC = ar rcs
 HEADER = libft.h

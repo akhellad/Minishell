@@ -6,38 +6,62 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 01:41:27 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/22 04:25:21 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/22 21:00:19 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
+void display_tokens(t_lexer* head) {
+    t_lexer* current = head;
+
+    printf("Contenu de la liste : \n");
+    while (current != NULL) {
+        if (current->token != 0) {
+            switch (current->token) {
+                case PIPE:
+                    printf("| ");
+                    break;
+                case GREAT:
+                    printf("> ");
+                    break;
+                case TWO_GREAT:
+                    printf(">> ");
+                    break;
+                case LESS:
+                    printf("< ");
+                    break;
+                case TWO_LESS:
+                    printf("<< ");
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            printf("%s ", current->arg);
+        }
+		printf("\n");
+        current = current->next;
+    }
+}
+
+int	init_infos(t_infos *infos)
+{
+	infos->pid = NULL;
+	set_path(infos);
+	return (0);
+}
+
 int	main(int ac, char **av, char **env)
 {
-	(void)ac;
-	(void)av;
-	(void)env;
-
-	int history_count;
-	char	*line;
-
-	history_count = 0;
-	while(1)
+	t_infos	infos;
+	if(ac != 1 || av[1])
 	{
-		ft_putstr_fd("minishell>", 0);
-		line = get_next_line(0);
-		pid_t	pid;
-		pid = fork();
-		if (pid < 0)
-			return (1);
-		else if (pid == 0)
-		{
-			execute(line, env);
-			add_history(line, history_count);
-		}
-		else
-			waitpid(pid, 0, 0);
-		free(line);
+		printf("Too many arguments\n");
+		return (0);
 	}
+	infos.envp = ft_arrdup(env);
+	init_infos(&infos);
+	main_loop(&infos);
 	return (0);
 }

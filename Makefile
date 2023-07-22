@@ -6,13 +6,13 @@
 #    By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/22 01:40:01 by akhellad          #+#    #+#              #
-#    Updated: 2023/07/22 06:56:25 by akhellad         ###   ########.fr        #
+#    Updated: 2023/07/22 21:30:15 by akhellad         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= minishell
 
-SRCS 	= srcs/main.c srcs/execute.c srcs/history.c srcs/parser.c srcs/utils.c
+SRCS 	= srcs/main.c srcs/execute.c srcs/history.c srcs/parser.c srcs/utils.c srcs/loop.c srcs/envp.c
 OBJS 	= ${SRCS:.c=.o}
 
 HEADER	= -Iincludes
@@ -20,7 +20,7 @@ LIBFT   = -Llibft -lft
 INC		= includes/*.h libft/includes/libft.h
 
 CC 		= gcc
-CFLAGS 	= -Wall -Wextra -Werror -g3
+CFLAGS 	= -Wall -Wextra -Werror -g3 
 
 LIB_A   = libft/libft.a
 
@@ -32,7 +32,7 @@ ${LIB_A}:	force libft/includes/libft.h
 
 ${NAME}:	${OBJS} ${LIB_A}
 					@echo "\033[0;34m[OK] \033[0m       \033[0;33m Created  \033[0m: ${NAME}" 
-					@$(CC) ${OBJS} -Llibft -lft -o ${NAME}
+					@$(CC) ${OBJS} -Llibft -lft -lreadline -o ${NAME}
 
 ${OBJS}: %.o: %.c Makefile ${INC} 
 				@echo "\033[33;32m[OK] \033[0m       \033[0;33m Compiling:\033[0m" $<
