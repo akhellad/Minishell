@@ -6,13 +6,13 @@
 #    By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/22 01:40:01 by akhellad          #+#    #+#              #
-#    Updated: 2023/07/22 04:18:50 by akhellad         ###   ########.fr        #
+#    Updated: 2023/07/22 06:56:25 by akhellad         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= minishell
 
-SRCS 	= srcs/main.c srcs/execute.c srcs/history.c
+SRCS 	= srcs/main.c srcs/execute.c srcs/history.c srcs/parser.c srcs/utils.c
 OBJS 	= ${SRCS:.c=.o}
 
 HEADER	= -Iincludes
