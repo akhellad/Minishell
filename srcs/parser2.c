@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 08:19:58 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/23 22:46:18 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/23 23:58:32 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ t_cmds_infos	*init_cmd(t_parser_infos *parser_infos)
 	{
 		if (tmp->arg)
 		{
-			//args[i++] = ft_strdup(tmp->arg);
+			args[i++] = ft_strdup(tmp->arg);
 			ft_dellexer_one(&parser_infos->lexers, tmp->index);
 			tmp = parser_infos->lexers;
 		}
@@ -132,13 +132,13 @@ int parser(t_infos *infos)
 		parser_infos = init_parser_infos(infos->lexers, infos);
 		printf("lol");
 		node = init_cmd(&parser_infos);
-//		if (!node)
-//			parser_error(0, infos, parser_infos.lexers);
-		/*if (!infos->cmds_infos)
+		if (!node)
+			parser_error(0, infos, parser_infos.lexers);
+		if (!infos->cmds_infos)
 			infos->cmds_infos = node;
 		else
 			ft_cmds_infosadd_back(&infos->cmds_infos, node);
-		infos->lexers = parser_infos.lexers;*/
+		infos->lexers = parser_infos.lexers;
 	}
 	return (0);
 }
