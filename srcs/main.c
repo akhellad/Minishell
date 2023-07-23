@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 01:41:27 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/22 21:00:19 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/23 09:51:06 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	init_infos(t_infos *infos)
 {
 	infos->pid = NULL;
 	set_path(infos);
-	return (0);
+	return (1);
 }
 
 int	main(int ac, char **av, char **env)

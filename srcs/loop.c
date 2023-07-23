@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 18:19:13 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/22 21:33:29 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/23 09:42:33 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,15 @@ void display_history(void)
 int	reset_infos(t_infos *infos)
 {
 	free(infos->args);
-	if(infos->pid)
+	if (infos->pid)
 		free(infos->pid);
 	free_arr(infos->paths);
+	display_tokens(infos->lexers);
 	init_infos(infos);
 	main_loop(infos);
 	return (1);
 }
+
 
 int	main_loop(t_infos *infos)
 {
@@ -54,7 +56,12 @@ int	main_loop(t_infos *infos)
 	if (infos->args[0] == '\0')
 		return (reset_infos(infos));
 	add_history(infos->args);
-	display_history();
+	if(!check_quotes(infos->args))
+		return (ft_error(2, infos));
+	if(!set_token(infos))
+		return(ft_error(1, infos));
+	parser(infos);
+//	printf("%d\n", infos->pipes);
 	reset_infos(infos);
 	return (0);
 }

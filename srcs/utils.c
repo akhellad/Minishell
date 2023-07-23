@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 06:53:48 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/22 20:39:32 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/23 02:12:48 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,41 @@ void	free_arr(char **split_arr)
 	free(split_arr);
 }
 
+int	check_double_quotes(char *str, int i, int *quotes_nbr, int quotes)
+{
+	int j;
+
+	j = i + 1;
+	*quotes_nbr += 1;
+	while (str[j] && str[j] != quotes)
+		j++;
+	if (str[j] == quotes)
+		*quotes_nbr += 1;
+	return (j - i);
+}
+
+int	check_quotes(char *str)
+{
+	int	i;
+	int	j;
+	int	n;
+
+	i = 0;
+	j = 0;
+	n = 0;
+	while (str[i])
+	{
+		if (str[i] == 39)
+			i += check_double_quotes(str, i, &j, 39);
+		if (str[i] == 34)
+			i += check_double_quotes(str, i, &n, 34);
+		i++;
+	}
+	if ((n > 0 && n % 2 != 0) || (j > 0 && j % 2 != 0))
+		return (0);
+	return (1);
+}
+
 char	**ft_arrdup(char **arr)
 {
 	char	**tmp;
@@ -81,4 +116,31 @@ char	**ft_arrdup(char **arr)
 		i++;
 	}
 	return (tmp);
+}
+
+int	ft_error(int error, t_infos *infos)
+{
+	ft_putstr_fd("minishell: ", STDERR_FILENO);
+	if (error == 0)
+		ft_putstr_fd("syntax error near unexpected token 'newline'\n",
+			STDERR_FILENO);
+	else if (error == 1)
+		ft_putstr_fd("memory error: unable to assign memory\n", STDERR_FILENO);
+	else if (error == 2)
+		ft_putstr_fd("syntax error: unable to locate closing quotation\n",
+			STDERR_FILENO);
+	else if (error == 3)
+		ft_putstr_fd("Parser problem\n", STDERR_FILENO);
+	else if (error == 4)
+		ft_putstr_fd("Failed to create pipe\n", STDERR_FILENO);
+	else if (error == 5)
+		ft_putstr_fd("Failed to fork\n", STDERR_FILENO);
+	else if (error == 6)
+		ft_putstr_fd("outfile: Error\n", STDERR_FILENO);
+	else if (error == 7)
+		ft_putstr_fd("infile: No such file or directory\n", STDERR_FILENO);
+	else if (error == 8)
+		ft_putendl_fd("Path does not exist", STDERR_FILENO);
+	reset_infos(infos);
+	return (EXIT_FAILURE);
 }

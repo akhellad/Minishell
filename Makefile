@@ -6,13 +6,23 @@
 #    By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/22 01:40:01 by akhellad          #+#    #+#              #
-#    Updated: 2023/07/22 21:30:15 by akhellad         ###   ########.fr        #
+#    Updated: 2023/07/23 09:20:15 by akhellad         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= minishell
 
-SRCS 	= srcs/main.c srcs/execute.c srcs/history.c srcs/parser.c srcs/utils.c srcs/loop.c srcs/envp.c
+SRCS 	= srcs/main.c \
+		srcs/execute.c \
+		srcs/history.c \
+		srcs/parser.c \
+		srcs/utils.c \
+		srcs/loop.c \
+		srcs/envp.c \
+		srcs/parser2.c \
+		srcs/clear_lexer.c \
+		srcs/errors.c
+
 OBJS 	= ${SRCS:.c=.o}
 
 HEADER	= -Iincludes
