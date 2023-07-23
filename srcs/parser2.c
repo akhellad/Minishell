@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 08:19:58 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/23 23:58:32 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/24 00:06:18 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ int parser(t_infos *infos)
 		if (check_pipe_errors(infos, infos->lexers->token))
 			return (1);
 		parser_infos = init_parser_infos(infos->lexers, infos);
-		printf("lol");
+//		printf("lol");
 		node = init_cmd(&parser_infos);
 		if (!node)
 			parser_error(0, infos, parser_infos.lexers);
