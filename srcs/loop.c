@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 18:19:13 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/23 09:42:33 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/23 22:33:13 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	main_loop(t_infos *infos)
 	if(!set_token(infos))
 		return(ft_error(1, infos));
 	parser(infos);
-//	printf("%d\n", infos->pipes);
+	printf("%d\n", infos->pipes);
 	reset_infos(infos);
 	return (0);
 }

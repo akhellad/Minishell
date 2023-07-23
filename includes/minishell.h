@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 01:41:30 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/23 22:19:19 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/23 22:29:22 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ typedef struct	s_infos
 	char	**paths;
 	char	**envp;
 	int		*pid;
-	struct t_cmds_infos	*cmds_infos;
+	struct s_cmds_infos	*cmds_infos;
 	int		pipes;
 	t_lexer	*lexers;
 }		t_infos;

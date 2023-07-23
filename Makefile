@@ -6,7 +6,7 @@
 #    By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/22 01:40:01 by akhellad          #+#    #+#              #
-#    Updated: 2023/07/23 21:42:35 by akhellad         ###   ########.fr        #
+#    Updated: 2023/07/23 22:35:59 by akhellad         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ LIBFT   = -Llibft -lft
 INC		= includes/*.h libft/includes/libft.h
 
 CC 		= gcc
-CFLAGS 	= -Wall -Wextra -Werror -g3 
+CFLAGS 	= -g3 
 
 LIB_A   = libft/libft.a
 
