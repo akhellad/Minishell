@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 01:41:27 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/23 09:51:06 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/23 21:27:59 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void display_tokens(t_lexer* head) {
     t_lexer* current = head;
 
-    printf("Contenu de la liste : \n");
+    printf("Contenu de la liste : ");
     while (current != NULL) {
         if (current->token != 0) {
             switch (current->token) {
@@ -40,9 +40,10 @@ void display_tokens(t_lexer* head) {
         } else {
             printf("%s ", current->arg);
         }
-		printf("\n");
+        printf("\n");
         current = current->next;
     }
+//	printf("\n");
 }
 
 int	init_infos(t_infos *infos)

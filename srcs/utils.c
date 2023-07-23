@@ -6,11 +6,27 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 06:53:48 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/23 02:12:48 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/23 22:03:21 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+int		count_args(t_lexer	*lexers)
+{
+	t_lexer	*tmp;
+	int		i;
+
+	i = 0;
+	tmp = lexers;
+	while (tmp && tmp->token != PIPE)
+	{
+		if (tmp->index >= 0)
+			i++;
+		tmp = tmp->next;
+	}
+	return (i);
+}
 
 t_lexer *ft_newlexer(char *str, int token)
 {

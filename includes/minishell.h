@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 01:41:30 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/23 09:24:12 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/23 22:19:19 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ typedef struct s_parser_infos
 	t_lexer		*lexers;
 	t_lexer		*redir;
 	int			redir_nbr;
-	t_infos		*infos;
+	struct s_infos		*infos;
 }	t_parser_infos;
 
 typedef struct s_cmds_infos
@@ -84,7 +84,8 @@ void    ft_addlexer_back(t_lexer **lexers, t_lexer *new);
 char	**ft_arrdup(char **arr);
 void	free_arr(char **split_arr);
 int		check_quotes(char *str);
-int	ft_error(int error, t_infos *infos);
+int		ft_error(int error, t_infos *infos);
+int		count_args(t_lexer	*lexers);
 
 /*parser.c*/
 t_tokens    is_token(int c);
@@ -109,5 +110,8 @@ t_lexer *ft_clearlexer_one(t_lexer  **lexers);
 /*errors.c*/
 int	double_token_error(t_infos *infos, t_lexer *lexers, t_tokens token);
 void	parser_error(int error, t_infos *infos, t_lexer *lexers);
+
+/*redirs.c*/
+void    sort_redirs(t_parser_infos *parser_infos);
 
 #endif
