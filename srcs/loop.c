@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 18:19:13 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/23 22:33:13 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/24 00:13:44 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,27 @@ int	reset_infos(t_infos *infos)
 	if (infos->pid)
 		free(infos->pid);
 	free_arr(infos->paths);
-	display_tokens(infos->lexers);
 	init_infos(infos);
 	main_loop(infos);
 	return (1);
 }
 
+void print_parsed_elements(char **parsed_elements)
+{
+    if (parsed_elements == NULL)
+    {
+        printf("Le tableau est vide.\n");
+        return;
+    }
+
+    printf("Éléments parsés :\n");
+    int i = 0;
+    while (parsed_elements[i] != NULL)
+    {
+        printf("[%d] : %s\n", i, parsed_elements[i]);
+        i++;
+    }
+}
 
 int	main_loop(t_infos *infos)
 {
@@ -61,7 +76,7 @@ int	main_loop(t_infos *infos)
 	if(!set_token(infos))
 		return(ft_error(1, infos));
 	parser(infos);
-	printf("%d\n", infos->pipes);
+	print_parsed_elements(infos->cmds_infos->str);
 	reset_infos(infos);
 	return (0);
 }
