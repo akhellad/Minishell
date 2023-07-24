@@ -6,26 +6,26 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 21:42:38 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/24 02:26:37 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/24 04:26:14 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int     add_new_redirs(t_lexer *tmp, t_parser_infos *parser_infos)
+int	add_new_redirs(t_lexer *tmp, t_parser_infos *parser_infos)
 {
-    t_lexer *node;
-    int     i_1;
-    int     i_2;
+	t_lexer	*node;
+	int		index_1;
+	int		index_2;
 
 	node = ft_newlexer(ft_strdup(tmp->next->arg), tmp->token);
 	if (!node)
 		parser_error(1, parser_infos->infos, parser_infos->lexers);
-	ft_addlexer_back(&parser_infos->lexers, node);
-	i_1 = tmp->index;
-	i_2 = tmp->next->index;
-	ft_dellexer_one(&parser_infos->lexers, i_1);
-	ft_dellexer_one(&parser_infos->lexers, i_2);
+	ft_addlexer_back(&parser_infos->redir, node);
+	index_1 = tmp->index;
+	index_2 = tmp->next->index;
+	ft_dellexer_one(&parser_infos->lexers, index_1);
+	ft_dellexer_one(&parser_infos->lexers, index_2);
 	parser_infos->redir_nbr++;
 	return (0);
 }
@@ -35,8 +35,6 @@ void	sort_redirs(t_parser_infos *parser_infos)
 	t_lexer	*tmp;
 
 	tmp = parser_infos->lexers;
-//	print_parser_infos(parser_infos);
-//	display_tokens(tmp);
 	while (tmp && tmp->token == 0)
 		tmp = tmp->next;
 	if (!tmp || tmp->token == PIPE)

@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 01:41:30 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/24 01:19:12 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/24 05:40:46 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,12 @@ typedef struct s_cmds_infos
 	struct s_cmds_infos	*prev;
 }	t_cmds_infos;
 
+typedef struct s_global
+{
+	int	in_cmd;
+	int	error_num;
+}	t_global;
+
 /*main.c*/
 int	init_infos(t_infos *infos);
 int	reset_infos(t_infos *infos);
@@ -86,6 +92,7 @@ void	free_arr(char **split_arr);
 int		check_quotes(char *str);
 int		ft_error(int error, t_infos *infos);
 int		count_args(t_lexer	*lexers);
+void	ft_cmdsinfo_clear(t_cmds_infos **lst);
 
 /*parser.c*/
 t_tokens    is_token(int c);
@@ -115,5 +122,10 @@ void	parser_error(int error, t_infos *infos, t_lexer *lexers);
 
 /*redirs.c*/
 void    sort_redirs(t_parser_infos *parser_infos);
+
+/*expand.c*/
+char    **expand(t_infos *infos, char **str);
+
+
 
 #endif

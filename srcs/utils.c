@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 06:53:48 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/23 22:03:21 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/24 03:33:38 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,28 @@ char	**ft_arrdup(char **arr)
 		i++;
 	}
 	return (tmp);
+}
+
+void	ft_cmdsinfo_clear(t_cmds_infos **lst)
+{
+	t_cmds_infos	*tmp;
+	t_lexer			*redir_tmp;
+
+	if (!*lst)
+		return ;
+	while (*lst)
+	{
+		tmp = (*lst)->next;
+		redir_tmp = (*lst)->redir;
+		ft_clearlexer(&redir_tmp);
+		if ((*lst)->str)
+			free_arr((*lst)->str);
+		if ((*lst)->filename)
+			free((*lst)->filename);
+		free(*lst);
+		*lst = tmp;
+	}
+	*lst = NULL;
 }
 
 int	ft_error(int error, t_infos *infos)

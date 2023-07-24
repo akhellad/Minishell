@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 08:19:58 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/24 02:26:33 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/24 02:46:05 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,12 +133,6 @@ int parser(t_infos *infos)
 	pipes_nbr(infos->lexers, infos);
 	if (infos->lexers->token == PIPE)
 		return (double_token_error(infos, infos->lexers, infos->lexers->token));
-	t_lexer	*tmp = infos->lexers;
-	while (tmp)
-	{
-		printf("Token : %d, Argument : %s\n", tmp->token, tmp->arg);
-		tmp = tmp->next;
-	}
 	while(infos->lexers)
 	{
 		if (infos->lexers && infos->lexers->token == PIPE)

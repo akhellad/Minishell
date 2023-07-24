@@ -6,7 +6,7 @@
 #    By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/22 01:40:01 by akhellad          #+#    #+#              #
-#    Updated: 2023/07/23 22:35:59 by akhellad         ###   ########.fr        #
+#    Updated: 2023/07/24 05:35:36 by akhellad         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,8 @@ SRCS 	= srcs/main.c \
 		srcs/parser2.c \
 		srcs/clear_lexer.c \
 		srcs/errors.c \
-		srcs/redirs.c
+		srcs/redirs.c \
+		srcs/expand.c
 
 OBJS 	= ${SRCS:.c=.o}
 
