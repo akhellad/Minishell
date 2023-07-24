@@ -6,13 +6,11 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 05:00:41 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/24 05:50:08 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/24 08:46:17 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-t_global global;
 
 size_t	find_equal(char *str)
 {
@@ -154,7 +152,12 @@ char    **expand(t_infos *infos, char **str)
 			tmp = handle_dollar(infos, str[i]);
 			free (str[i]);
 			str[i] = tmp;
-		}	
+		}
+		if (ft_strncmp(str[0], "export", ft_strlen(str[0]) - 1) != 0)
+		{
+			str[i] = del_quotes(str[i], '\"');
+			str[i] = del_quotes(str[i], '\'');
+		}
 		i++;
 	}
 	return (str);

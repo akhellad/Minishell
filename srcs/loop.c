@@ -6,11 +6,13 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 18:19:13 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/24 05:49:31 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/24 08:48:59 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+t_global global;
 
 void display_history(void)
 {
@@ -56,12 +58,12 @@ void print_parsed_elements(char **parsed_elements)
     }
 }
 
-/*int	check_execute(t_infos *infos)
+int	check_execute(t_infos *infos)
 {
 	global.in_cmd = 1;
 	if (infos->pipes == 0)
 		one_cmd(infos->cmds_infos, infos);
-}*/
+}
 
 int	main_loop(t_infos *infos)
 {
@@ -84,6 +86,8 @@ int	main_loop(t_infos *infos)
 	if(!set_token(infos))
 		return(ft_error(1, infos));
 	parser(infos);
+	call_expand(infos, infos->cmds_infos);
+	print_parsed_elements(infos->cmds_infos->str);
 	reset_infos(infos);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 01:41:30 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/24 05:40:46 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/24 08:44:41 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ typedef struct s_global
 	int	error_num;
 }	t_global;
 
+extern t_global global;
+
 /*main.c*/
 int	init_infos(t_infos *infos);
 int	reset_infos(t_infos *infos);
@@ -93,6 +95,7 @@ int		check_quotes(char *str);
 int		ft_error(int error, t_infos *infos);
 int		count_args(t_lexer	*lexers);
 void	ft_cmdsinfo_clear(t_cmds_infos **lst);
+char	*del_quotes(char *str, char c);
 
 /*parser.c*/
 t_tokens    is_token(int c);
@@ -125,6 +128,7 @@ void    sort_redirs(t_parser_infos *parser_infos);
 
 /*expand.c*/
 char    **expand(t_infos *infos, char **str);
+t_cmds_infos	*call_expand(t_infos *infos, t_cmds_infos *cmd);
 
 
 
