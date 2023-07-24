@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 21:42:38 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/24 00:52:47 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/24 02:26:37 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,21 @@ void	sort_redirs(t_parser_infos *parser_infos)
 	t_lexer	*tmp;
 
 	tmp = parser_infos->lexers;
+//	print_parser_infos(parser_infos);
+//	display_tokens(tmp);
 	while (tmp && tmp->token == 0)
 		tmp = tmp->next;
 	if (!tmp || tmp->token == PIPE)
 		return ;
 	if (!tmp->next)
+	{
 		parser_error(0, parser_infos->infos, parser_infos->lexers);
+		return ;
+	}
 	if (tmp->next->token)
 		double_token_error(parser_infos->infos,
 			parser_infos->lexers, tmp->next->token);
-	if ((tmp->token >= GREAT
+	if (tmp->next && (tmp->token >= GREAT
 			&& tmp->token <= TWO_LESS))
 		add_new_redirs(tmp, parser_infos);
 	sort_redirs(parser_infos);

@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 01:41:30 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/23 22:29:22 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/24 01:19:12 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,11 @@ int		set_path(t_infos *infos);
 
 /*loop.c*/
 int		main_loop(t_infos *infos);
+void 	print_parser_infos(t_parser_infos *parser_infos);
 
 /*parser2.c*/
 int parser(t_infos *infos);
+
 
 /*clear_lexer.c*/
 void    ft_clearlexer(t_lexer **lexers);

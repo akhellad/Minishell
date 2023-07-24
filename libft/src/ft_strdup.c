@@ -6,35 +6,28 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 15:29:21 by akhellad          #+#    #+#             */
-/*   Updated: 2023/06/01 15:20:48 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/24 01:39:33 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strcpy(char *dest, const char *src)
+char	*ft_strdup(const char *s1)
 {
-	unsigned int	i;
+	char	*s2;
+	size_t	size;
+	size_t	i;
 
 	i = 0;
-	while (src[i])
-	{
-		dest[i] = src[i];
-		i ++;
-	}
-	dest[i] = '\0';
-	return (dest);
-}
-
-char	*ft_strdup(const char *src)
-{
-	char	*copie;
-	char	*src1;
-
-	src1 = (char *)src;
-	copie = malloc(ft_strlen(src1) + 1 * sizeof(char));
-	if (!copie)
+	size = ft_strlen(s1);
+	s2 = (char *)malloc((size * sizeof(char)) + 1);
+	if (!s2)
 		return (0);
-	copie = ft_strcpy(copie, src1);
-	return (copie);
+	while (i < size)
+	{
+		s2[i] = s1[i];
+		i++;
+	}
+	s2[i] = '\0';
+	return (s2);
 }

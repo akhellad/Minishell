@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 08:19:58 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/24 01:15:25 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/24 02:26:33 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,15 @@ t_cmds_infos	*ft_cmds_infonew(char **str, int redir_nbr, t_lexer *redirections)
 	new->next = NULL;
 	new->prev = NULL;
 	return (new);
+}
+
+void print_parser_infos(t_parser_infos *parser_infos) {
+    printf("=== Parser Infos ===\n");
+    display_tokens(parser_infos->lexers);
+    printf("redir: %p\n", parser_infos->redir);
+    printf("redir_nbr: %d\n", parser_infos->redir_nbr);
+    display_tokens(parser_infos->infos->lexers);
+    printf("====================\n");
 }
 
 t_cmds_infos	*init_cmd(t_parser_infos *parser_infos)
@@ -113,14 +122,6 @@ int	check_pipe_errors(t_infos *infos, t_tokens token)
 	return (0);
 }
 
-void print_parser_infos(t_parser_infos *parser_infos) {
-    printf("=== Parser Infos ===\n");
-    display_tokens(parser_infos->lexers);
-    printf("redir: %p\n", parser_infos->redir);
-    printf("redir_nbr: %d\n", parser_infos->redir_nbr);
-    display_tokens(parser_infos->infos->lexers);
-    printf("====================\n");
-}
 
 int parser(t_infos *infos)
 {
@@ -132,6 +133,12 @@ int parser(t_infos *infos)
 	pipes_nbr(infos->lexers, infos);
 	if (infos->lexers->token == PIPE)
 		return (double_token_error(infos, infos->lexers, infos->lexers->token));
+	t_lexer	*tmp = infos->lexers;
+	while (tmp)
+	{
+		printf("Token : %d, Argument : %s\n", tmp->token, tmp->arg);
+		tmp = tmp->next;
+	}
 	while(infos->lexers)
 	{
 		if (infos->lexers && infos->lexers->token == PIPE)
@@ -139,7 +146,6 @@ int parser(t_infos *infos)
 		if (check_pipe_errors(infos, infos->lexers->token))
 			return (1);
 		parser_infos = init_parser_infos(infos->lexers, infos);
-		print_parser_infos(&parser_infos);
 		node = init_cmd(&parser_infos);
 		if (!node)
 			parser_error(0, infos, parser_infos.lexers);

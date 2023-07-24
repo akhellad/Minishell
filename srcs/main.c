@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 01:41:27 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/23 21:27:59 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/24 01:58:47 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ void display_tokens(t_lexer* head) {
                 default:
                     break;
             }
-        } else {
-            printf("%s ", current->arg);
         }
+        else if (head->arg)
+            printf("%s\n", head->arg);
         printf("\n");
         current = current->next;
     }
