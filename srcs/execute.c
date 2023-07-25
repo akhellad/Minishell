@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 03:00:03 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/25 01:42:10 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/25 03:37:09 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int		execute(t_cmds_infos *cmd, t_infos *infos)
 
 	i = 0;
 	cmd->str = resplit_str(cmd->str);
+	printf("%s\n", cmd->str[0]);
 	if (!access(cmd->str[0], F_OK))
 		execve(cmd->str[0], cmd->str, infos->envp);
 	while (infos->paths[i])

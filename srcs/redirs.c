@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 21:42:38 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/25 01:46:34 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/25 03:36:01 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,7 @@ void	sort_redirs(t_parser_infos *parser_infos)
 	if (tmp->next && (tmp->token >= GREAT
 			&& tmp->token <= TWO_LESS))
 		add_new_redirs(tmp, parser_infos);
+	printf("%s\n", parser_infos->lexers->arg);
+//	printf("index 1 : %d\nindex 2 : %d\n", tmp->index, tmp->next->index);
 	sort_redirs(parser_infos);
 }

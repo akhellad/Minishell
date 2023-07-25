@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 08:19:58 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/25 01:47:06 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/25 03:21:25 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void print_parser_infos(t_parser_infos *parser_infos) {
     display_tokens(parser_infos->lexers);
     printf("redir: %p\n", parser_infos->redir);
     printf("redir_nbr: %d\n", parser_infos->redir_nbr);
-    display_tokens(parser_infos->infos->lexers);
     printf("====================\n");
 }
 
@@ -62,7 +61,6 @@ t_cmds_infos	*init_cmd(t_parser_infos *parser_infos)
 
 	i = 0;
 	sort_redirs(parser_infos);
-	printf("%s\n", parser_infos->lexers->arg);
 	args_nbr = count_args(parser_infos->lexers);
 	args = ft_calloc(args_nbr + 1, sizeof(char *));
 	if (!args)

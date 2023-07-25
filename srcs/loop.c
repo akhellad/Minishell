@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 18:19:13 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/25 01:11:17 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/25 03:25:19 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,19 @@ int	check_execute(t_infos *infos)
 	return (0);
 }
 
+void	display_index(t_lexer *lexers)
+{
+	t_lexer *tmp;
+
+	tmp = lexers;
+	while (tmp)
+	{
+		printf("%d\n", tmp->index);
+		tmp = tmp->next;
+	}
+	free(tmp);
+}
+
 int	main_loop(t_infos *infos)
 {
 	char *tmp;
@@ -88,6 +101,7 @@ int	main_loop(t_infos *infos)
 	if(!set_token(infos))
 		return(ft_error(1, infos));
 	parser(infos);
+//	display_index(infos->lexers);
 	check_execute(infos);
 	reset_infos(infos);
 	return (0);

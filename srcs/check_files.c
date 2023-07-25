@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 22:05:56 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/25 00:59:04 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/25 03:39:34 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ int	check_outfile_redir(t_lexer *redir)
 	int	fd;
 
 	if (redir->token == TWO_GREAT)
-		fd = open(redir->arg, O_CREAT | O_RDWR | O_APPEND, 0644);
+		fd = open(redir->arg, O_CREAT | O_RDWR | O_APPEND, 0777);
 	else
-		fd = open(redir->arg, O_CREAT | O_RDWR | O_TRUNC, 0644);
+		fd = open(redir->arg, O_CREAT | O_RDWR | O_TRUNC, 0777);
 	return (fd);
 }
 
@@ -31,16 +31,16 @@ int	init_outfile(t_lexer *redirection)
 	if (fd < 0)
 	{
 		ft_putstr_fd("minishell: outfile: Error\n", STDERR_FILENO);
-		return (EXIT_FAILURE);
+		return (1);
 	}
-	if (fd > 0 && dup2(fd, STDOUT_FILENO) < 0)
+	if (fd > 0 && dup2(fd, 1) < 0)
 	{
 		ft_putstr_fd("minishell: pipe error\n", STDERR_FILENO);
-		return (EXIT_FAILURE);
+		return (1);
 	}
 	if (fd > 0)
 		close(fd);
-	return (EXIT_SUCCESS);
+	return (0);
 }
 
 int     init_infile(char *file)
