@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 05:56:46 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/25 05:57:19 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/25 07:19:34 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,15 @@ void    ft_addlexer_back(t_lexer **lexers, t_lexer *new)
         tmp = tmp->next;
     tmp->next = new;
     new->prev = tmp;
+}
+
+int	add_lexer(char *str, t_tokens token, t_lexer **lexers)
+{
+	t_lexer	*lexer;
+
+	lexer = ft_newlexer(str, token);
+	if (!lexer)
+		return (0);
+	ft_addlexer_back(lexers, lexer);
+	return (1);
 }

@@ -5,139 +5,108 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/22 05:53:43 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/25 03:26:28 by akhellad         ###   ########.fr       */
+/*   Created: 2023/07/23 08:19:58 by akhellad          #+#    #+#             */
+/*   Updated: 2023/07/25 07:25:12 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	sort_token(char *str, int i, t_lexer **lexers);
-
-t_tokens    is_token(int c)
+t_cmds_infos	*init_cmd(t_parser_infos *parser_infos)
 {
-    static int tokens[3][2] = {
-	{124, PIPE}, 
-	{62, GREAT}, 
-	{60, LESS}
-	};
+	char	**args;
+	int		i;
+	int		args_nbr;
+	t_lexer	*tmp;
 
-    int i;
-
-    i = 0;
-    while (i < 3)
-    {
-        if (tokens[i][0] == c)
-            return (tokens[i][1]);
-        i ++;
-    }
-	return (0);
-}
-
-int is_space(char c)
-{
-    if (c == ' ' || (c > 8 && c < 14))
-        return (1);
-    return (0);
-}
-
-int skip_spaces(char *str, int i)
-{
-    int j;
-
-    j = 0;
-    while (is_space(str[i + j]))
-        j++;
-    return (j);
-}
-
-int	quotes(int i, char *str, char del)
-{
-	int j;
-
-	j = 0;
-	if (str[i + j] == del)
+	i = 0;
+	sort_redirs(parser_infos);
+	args_nbr = count_args(parser_infos->lexers);
+	args = ft_calloc(args_nbr + 1, sizeof(char *));
+	if (!args)
+		parser_error(1, parser_infos->infos, parser_infos->lexers);
+	tmp = parser_infos->lexers;
+	while (args_nbr > 0)
 	{
-		while (str[i + j] != del && str[i + j])
-			j ++;
-		j ++; 
+		if (tmp->arg)
+		{
+			args[i++] = ft_strdup(tmp->arg);
+			ft_dellexer_one(&parser_infos->lexers, tmp->index);
+			tmp = parser_infos->lexers;
+		}
+		args_nbr--;
 	}
-	return (j);
+	return (ft_cmds_infonew(args, parser_infos->redir_nbr, parser_infos->redir));
 }
 
-int	add_lexer(char *str, t_tokens token, t_lexer **lexers)
+t_parser_infos	init_parser_infos(t_lexer *lexers, t_infos *infos)
 {
-	t_lexer	*lexer;
+	t_parser_infos	parser_infos;
 
-	lexer = ft_newlexer(str, token);
-	if (!lexer)
-		return (0);
-	ft_addlexer_back(lexers, lexer);
-	return (1);
+	parser_infos.lexers = lexers;
+	parser_infos.redir = NULL;
+	parser_infos.redir_nbr = 0;
+	parser_infos.infos = infos;
+	return (parser_infos);
 }
 
-int	words(int i, char *str, t_lexer **lexers)
+void    pipes_nbr(t_lexer *lexers, t_infos *infos)
 {
-	int j;
+    t_lexer *tmp;
+
+	tmp = lexers;
+	infos->pipes = 0;
+	while(tmp)
+	{
+		if (tmp->token == PIPE)
+			infos->pipes++;
+		tmp = tmp->next;
+	}
 	
-	j = 0;
-	while (str[i + j] && !(is_token(str[i + j])))
-	{
-		j += quotes(i + j, str, 39);
-		j += quotes(i + j, str, 34);
-		if (is_space(str[i + j]))
-			break ;
-		else
-			j++;
-	}
-	if (!add_lexer(ft_substr(str, i, j), 0, lexers))
-		return (-1);
-	return (j);
 }
 
-int	sort_token(char *str, int i, t_lexer **lexers)
+int	check_pipe_errors(t_infos *infos, t_tokens token)
 {
-	t_tokens	token;
-
-	token = is_token(str[i]);
-	if (token == GREAT && is_token(str[i + 1]) == GREAT)
+	if (token == PIPE)
 	{
-		if(!add_lexer(0, TWO_GREAT, lexers))
-			return (-1);
-		return (2);
+		double_token_error(infos, infos->lexers,
+			infos->lexers->token);
+		return (1);
 	}
-	if (token == LESS && is_token(str[i + 1]) == LESS)
+	if (!infos->lexers)
 	{
-		if(!add_lexer(0, TWO_LESS, lexers))
-			return (-1);
-		return (2);
-	}
-	else if (token)
-	{
-		if (!add_lexer(0, token, lexers))
-			return (-1);
+		parser_error(0, infos, infos->lexers);
 		return (1);
 	}
 	return (0);
 }
 
-int	set_token(t_infos *infos)
-{
-	int	i;
-	int	j;
 
-	i = 0;
-	while(infos->args[i])
+int parser(t_infos *infos)
+{
+	t_cmds_infos    *node;
+	t_parser_infos  parser_infos;
+
+
+    infos->cmds_infos = NULL;
+	pipes_nbr(infos->lexers, infos);
+	if (infos->lexers->token == PIPE)
+		return (double_token_error(infos, infos->lexers, infos->lexers->token));
+	while(infos->lexers)
 	{
-		j = 0;
-		i += skip_spaces(infos->args, i);
-		if (is_token(infos->args[i]))
-			j = sort_token(infos->args, i, &infos->lexers);
-		if (!is_token(infos->args[i]))
-			j = words(i, infos->args, &infos->lexers);
-		if (j < 0)
-			return (0);
-		i += j;
+		if (infos->lexers && infos->lexers->token == PIPE)
+			ft_dellexer_one(&infos->lexers, infos->lexers->index);
+		if (check_pipe_errors(infos, infos->lexers->token))
+			return (1);
+		parser_infos = init_parser_infos(infos->lexers, infos);
+		node = init_cmd(&parser_infos);
+		if (!node)
+			parser_error(0, infos, parser_infos.lexers);
+		if (!infos->cmds_infos)
+			infos->cmds_infos = node;
+		else
+			ft_cmds_infosadd_back(&infos->cmds_infos, node);
+		infos->lexers = parser_infos.lexers;
 	}
-	return (1);
+	return (0);
 }

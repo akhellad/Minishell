@@ -6,28 +6,13 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 18:19:13 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/25 04:51:43 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/25 07:30:55 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
 t_global global;
-
-void display_history(void)
-{
-    HIST_ENTRY** history_entries = history_list();
-    int i = 0;
-
-    if (history_entries == NULL)
-        return;
-    while (history_entries[i] != NULL) 
-	{
-        printf("%d: %s\n", i + 1, history_entries[i]->line);
-        i++;
-    }
-    free(history_entries);
-}
 
 int	reset_infos(t_infos *infos)
 {
@@ -40,23 +25,6 @@ int	reset_infos(t_infos *infos)
 	infos->reset = 1;
 	main_loop(infos);
 	return (1);
-}
-
-void print_parsed_elements(char **parsed_elements)
-{
-    if (parsed_elements == NULL)
-    {
-        printf("Le tableau est vide.\n");
-        return;
-    }
-
-    printf("Éléments parsés :\n");
-    int i = 0;
-    while (parsed_elements[i] != NULL)
-    {
-        printf("[%d] : %s\n", i, parsed_elements[i]);
-        i++;
-    }
 }
 
 int	check_execute(t_infos *infos)
@@ -73,19 +41,6 @@ int	check_execute(t_infos *infos)
 	}
 	global.in_cmd = 0;
 	return (0);
-}
-
-void	display_index(t_lexer *lexers)
-{
-	t_lexer *tmp;
-
-	tmp = lexers;
-	while (tmp)
-	{
-		printf("%d\n", tmp->index);
-		tmp = tmp->next;
-	}
-	free(tmp);
 }
 
 int	main_loop(t_infos *infos)

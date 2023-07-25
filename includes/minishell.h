@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 01:41:30 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/25 06:01:14 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/25 07:26:46 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,11 +147,21 @@ char	**resplit_str(char **double_arr);
 /*lexers_utils.c*/
 t_lexer *ft_newlexer(char *str, int token);
 void    ft_addlexer_back(t_lexer **lexers, t_lexer *new);
+int	add_lexer(char *str, t_tokens token, t_lexer **lexers);
 
 /*quotes.c*/
 int		check_quotes(char *str);
 int	check_double_quotes(char *str, int i, int *quotes_nbr, int quotes);
 char	*del_quotes(char *str, char c);
+int		quotes(int i, char *str, char del);
 
+/*spaces.c*/
+int skip_spaces(char *str, int i);
+int is_space(char c);
+
+/*cmds_infos.c*/
+void	ft_cmds_infosadd_back(t_cmds_infos **lst, t_cmds_infos *new);
+t_cmds_infos	*ft_cmds_infonew(char **str, int redir_nbr, t_lexer *redirections);
+void	ft_cmdsinfo_clear(t_cmds_infos **lst);
 
 #endif

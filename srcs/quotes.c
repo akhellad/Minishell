@@ -6,9 +6,11 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 05:59:08 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/25 05:59:36 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/25 07:18:32 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "../includes/minishell.h"
 
 char	*del_quotes(char *str, char c)
 {
@@ -64,4 +66,18 @@ int	check_quotes(char *str)
 	if ((n > 0 && n % 2 != 0) || (j > 0 && j % 2 != 0))
 		return (0);
 	return (1);
+}
+
+int	quotes(int i, char *str, char del)
+{
+	int j;
+
+	j = 0;
+	if (str[i + j] == del)
+	{
+		while (str[i + j] != del && str[i + j])
+			j ++;
+		j ++; 
+	}
+	return (j);
 }
