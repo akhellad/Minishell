@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 01:41:30 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/24 08:44:41 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/25 00:40:11 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct	s_infos
 	char	**paths;
 	char	**envp;
 	int		*pid;
+	int		here_doc;
 	struct s_cmds_infos	*cmds_infos;
 	int		pipes;
 	t_lexer	*lexers;
@@ -62,7 +63,7 @@ typedef struct s_cmds_infos
 {
 	char	**str;
 	int		redir_nbr;
-	char	*filename;
+	char	*hd_filename;
 	t_lexer	*redir;
 	struct s_cmds_infos	*next;
 	struct s_cmds_infos	*prev;
@@ -71,6 +72,8 @@ typedef struct s_cmds_infos
 typedef struct s_global
 {
 	int	in_cmd;
+	int	in_here_doc;
+	int	stop_here_doc;
 	int	error_num;
 }	t_global;
 
@@ -82,7 +85,7 @@ int	reset_infos(t_infos *infos);
 void display_tokens(t_lexer* head);
 
 /*excute.c*/
-void	execute(char *argv, char **envp);
+void	one_cmd(t_cmds_infos *cmd, t_infos *infos);
 
 /*history.c*/
 
@@ -129,7 +132,13 @@ void    sort_redirs(t_parser_infos *parser_infos);
 /*expand.c*/
 char    **expand(t_infos *infos, char **str);
 t_cmds_infos	*call_expand(t_infos *infos, t_cmds_infos *cmd);
+char	*expand_str(t_infos *infos, char *str);
 
+/*check_files.c*/
+int     init_redirs(t_cmds_infos *cmd);
+
+/*here_doc.c*/
+int check_here_doc(t_infos *infos, t_cmds_infos *cmd);
 
 
 #endif

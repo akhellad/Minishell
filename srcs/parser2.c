@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 08:19:58 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/24 02:46:05 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/25 01:47:06 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_cmds_infos	*ft_cmds_infonew(char **str, int redir_nbr, t_lexer *redirections)
 	if (!new)
 		return (0);
 	new->str = str;
-	new->filename = NULL;
+	new->hd_filename = NULL;
 	new->redir_nbr = redir_nbr;
 	new->redir = redirections;
 	new->next = NULL;
@@ -62,6 +62,7 @@ t_cmds_infos	*init_cmd(t_parser_infos *parser_infos)
 
 	i = 0;
 	sort_redirs(parser_infos);
+	printf("%s\n", parser_infos->lexers->arg);
 	args_nbr = count_args(parser_infos->lexers);
 	args = ft_calloc(args_nbr + 1, sizeof(char *));
 	if (!args)

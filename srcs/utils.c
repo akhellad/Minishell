@@ -148,8 +148,8 @@ void	ft_cmdsinfo_clear(t_cmds_infos **lst)
 		ft_clearlexer(&redir_tmp);
 		if ((*lst)->str)
 			free_arr((*lst)->str);
-		if ((*lst)->filename)
-			free((*lst)->filename);
+		if ((*lst)->hd_filename)
+			free((*lst)->hd_filename);
 		free(*lst);
 		*lst = tmp;
 	}
