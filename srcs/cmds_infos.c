@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 07:23:43 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/25 07:26:39 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/25 22:40:19 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ void	ft_cmds_infosadd_back(t_cmds_infos **lst, t_cmds_infos *new)
 	new->prev = tmp;
 }
 
-t_cmds_infos	*ft_cmds_infonew(char **str, int redir_nbr, t_lexer *redirections)
+t_cmds_infos	*ft_cmds_infonew(char **str, int redir_nbr, \
+									t_lexer *redirections)
 {
 	t_cmds_infos	*new;
 

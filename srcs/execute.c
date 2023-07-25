@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 03:00:03 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/25 05:55:43 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/25 22:38:17 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	cmd_not_found(char *str)
 	return (127);
 }
 
-int		execute(t_cmds_infos *cmd, t_infos *infos)
+int	execute(t_cmds_infos *cmd, t_infos *infos)
 {
 	int		i;
 	char	*final_cmd;
@@ -67,5 +67,5 @@ void	one_cmd(t_cmds_infos *cmd, t_infos *infos)
 		sort_cmd(cmd, infos);
 	waitpid(pid, &status, 0);
 	if (WIFEXITED(status))
-		global.error_num = WEXITSTATUS(status);
+		g_global.error_num = WEXITSTATUS(status);
 }

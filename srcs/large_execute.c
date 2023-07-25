@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 04:42:49 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/25 05:22:21 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/25 22:32:52 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,41 +25,27 @@ void	cmd_dup(t_cmds_infos *cmd, t_infos *infos, int end[2], int in_fd)
 	sort_cmd(cmd, infos);
 }
 
-int	check_fd_heredoc(t_infos *infos, int end[2], t_cmds_infos *cmd)
+int	ft_fork(t_infos *infos, int end[2], int in_fd, t_cmds_infos *cmd)
 {
-	int	in_fd;
+	static int	i = 0;
 
-	if (infos->here_doc)
+	if (infos->reset == 1)
 	{
-		close(end[0]);
-		in_fd = open(cmd->hd_filename, O_RDONLY);
+		i = 0;
+		infos->reset = 0;
 	}
-	else
-		in_fd = end[0];
-	return (in_fd);
-}
-
-int ft_fork(t_infos *infos, int end[2], int in_fd, t_cmds_infos *cmd)
-{
-    static  int i = 0;
-
-    if (infos->reset == 1)
-    {
-        i = 0;
-        infos->reset = 0;
-    }
-    infos->pid[i] = fork();
-    if (infos->pid[i] < 0)
-        ft_error(5, infos);
-    if (infos->pid[i] == 0)
-        cmd_dup(cmd, infos, end, in_fd);
-    i++;
-    return (0);
+	infos->pid[i] = fork();
+	if (infos->pid[i] < 0)
+		ft_error(5, infos);
+	if (infos->pid[i] == 0)
+		cmd_dup(cmd, infos, end, in_fd);
+	i++;
+	return (0);
 }
 
 int	wait_all(int *pid, int nbr)
 {
-	int i;
+	int	i;
 	int	status;
 
 	i = 0;
@@ -70,7 +56,7 @@ int	wait_all(int *pid, int nbr)
 	}
 	waitpid(pid[i], &status, 0);
 	if (WIFEXITED(status))
-		global.error_num = WEXITSTATUS(status);
+		g_global.error_num = WEXITSTATUS(status);
 	return (0);
 }
 
@@ -89,19 +75,19 @@ t_cmds_infos	*ft_cmds_infosfirst(t_cmds_infos *cmds)
 	return (cmds);
 }
 
-int large_execute(t_infos *infos)
+int	large_execute(t_infos *infos)
 {
-    int end[2];
-    int in_fd;
+	int	end[2];
+	int	in_fd;
 
-    in_fd = 0;
-    while (infos->cmds_infos)
-    {
-        infos->cmds_infos = call_expand(infos, infos->cmds_infos);
-        if (infos->cmds_infos->next)
-            pipe(end);
-        check_here_doc(infos, infos->cmds_infos);
-        ft_fork(infos, end, in_fd, infos->cmds_infos);
+	in_fd = 0;
+	while (infos->cmds_infos)
+	{
+		infos->cmds_infos = call_expand(infos, infos->cmds_infos);
+		if (infos->cmds_infos->next)
+			pipe(end);
+		check_here_doc(infos, infos->cmds_infos);
+		ft_fork(infos, end, in_fd, infos->cmds_infos);
 		close(end[1]);
 		if (infos->cmds_infos->prev)
 			close(in_fd);
@@ -110,7 +96,7 @@ int large_execute(t_infos *infos)
 			infos->cmds_infos = infos->cmds_infos->next;
 		else
 			break ;
-    }
+	}
 	wait_all(infos->pid, infos->pipes);
 	infos->cmds_infos = ft_cmds_infosfirst(infos->cmds_infos);
 	return (0);

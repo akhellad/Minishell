@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 05:59:08 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/25 07:18:32 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/25 22:21:34 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*del_quotes(char *str, char c)
 
 int	check_double_quotes(char *str, int i, int *quotes_nbr, int quotes)
 {
-	int j;
+	int	j;
 
 	j = i + 1;
 	*quotes_nbr += 1;
@@ -70,7 +70,7 @@ int	check_quotes(char *str)
 
 int	quotes(int i, char *str, char del)
 {
-	int j;
+	int	j;
 
 	j = 0;
 	if (str[i + j] == del)

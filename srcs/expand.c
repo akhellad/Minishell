@@ -6,39 +6,13 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 05:00:41 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/24 08:46:17 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/25 22:36:27 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-size_t	find_equal(char *str)
-{
-	size_t	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == '=')
-			return (i + 1);
-		i++;
-	}
-	return (0);
-}
-
-int	expand_lengh(char *str, int j)
-{
-	int	i;
-
-	i = j + 1;
-	while (str[i] != '\0' && str[i] != '$' && str[i] != ' '
-		&& str[i] != '\"' && str[i] != '\'' && str[i] != '=' && str[i] != '-'
-		&& str[i] != ':')
-		i++;
-	return (i);
-}
-
-int		dollar_loop(t_infos *infos, char *str, char **tmp, int j)
+int	dollar_loop(t_infos *infos, char *str, char **tmp, int j)
 {
 	int		k;
 	int		ret;
@@ -49,7 +23,8 @@ int		dollar_loop(t_infos *infos, char *str, char **tmp, int j)
 	ret = 0;
 	while (infos->envp[k])
 	{
-		if (ft_strncmp(str + j + 1, infos->envp[k], find_equal(infos->envp[k]) - 1) == 0
+		if (ft_strncmp(str + j + 1, infos->envp[k], \
+			find_equal(infos->envp[k]) - 1) == 0
 			&& expand_lengh(str, j) - j == (int)find_equal(infos->envp[k]))
 		{
 			tmp2 = ft_strdup(infos->envp[k] + find_equal(infos->envp[k]));
@@ -66,7 +41,6 @@ int		dollar_loop(t_infos *infos, char *str, char **tmp, int j)
 	return (ret);
 }
 
-
 size_t	find_dollar(char *str)
 {
 	size_t	i;
@@ -79,34 +53,6 @@ size_t	find_dollar(char *str)
 		i++;
 	}
 	return (0);
-}
-int		check_digit(int j, char *str)
-{
-	int i;
-
-	i = j;
-	if (str[j] == '$')
-	{
-		if (ft_isdigit(str[j + 1]) == 1)
-			j += 2;
-	}
-	return (j - i);
-}
-
-int	handle_question(char **tmp)
-{
-	free(*tmp);
-	*tmp = ft_itoa(global.error_num);
-	return (ft_strlen(*tmp) + 1);
-}
-
-char	*char_to_str(char c)
-{
-	char	*str;
-
-	str = ft_calloc(sizeof(char), 2);
-	str[0] = c;
-	return (str);
 }
 
 char	*handle_dollar(t_infos *infos, char *str)
@@ -123,7 +69,8 @@ char	*handle_dollar(t_infos *infos, char *str)
 		j += check_digit(j, str);
 		if (str[j] == '$' && str[j + 1] == '?')
 			j += handle_question(&tmp);
-		else if (str[j] == '$' && (str[j + 1] != ' ' && (str[j + 1] != '"' || str[j + 2] != '\0')) && str[j + 1] != '\0')
+		else if (str[j] == '$' && (str[j + 1] != ' ' && (str[j + 1] != '"' \
+				|| str[j + 2] != '\0')) && str[j + 1] != '\0')
 			j += dollar_loop(infos, str, &tmp, j);
 		else
 		{
@@ -137,17 +84,17 @@ char	*handle_dollar(t_infos *infos, char *str)
 	return (tmp);
 }
 
-char    **expand(t_infos *infos, char **str)
+char	**expand(t_infos *infos, char **str)
 {
-    int     i;
-    char    *tmp;
+	int		i;
+	char	*tmp;
 
 	i = 0;
 	tmp = NULL;
-
 	while (str[i] != NULL)
 	{
-		if (str[i][find_dollar(str[i]) - 2] != '\'' && find_dollar(str[i]) != 0 && str[i][find_dollar(str[i])] != '\0')
+		if (str[i][find_dollar(str[i]) - 2] != '\'' && find_dollar(str[i]) != 0 \
+				&& str[i][find_dollar(str[i])] != '\0')
 		{
 			tmp = handle_dollar(infos, str[i]);
 			free (str[i]);
@@ -176,21 +123,4 @@ char	*expand_str(t_infos *infos, char *str)
 		str = tmp;
 	}
 	return (str);
-}
-
-t_cmds_infos	*call_expand(t_infos *infos, t_cmds_infos *cmd)
-{
-	t_lexer	*start;
-
-	cmd->str = expand(infos, cmd->str);
-	start = cmd->redir;
-	while (cmd->redir)
-	{
-		if (cmd->redir->token != TWO_LESS)
-			cmd->redir->arg
-				= expand_str(infos, cmd->redir->arg);
-		cmd->redir = cmd->redir->next;
-	}
-	cmd->redir = start;
-	return (cmd);
 }

@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 22:05:56 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/25 04:32:27 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/25 23:06:26 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ int	init_outfile(t_lexer *redirection)
 	fd = check_outfile_redir(redirection);
 	if (fd < 0)
 	{
-		ft_putstr_fd("minishell: outfile: Error\n", STDERR_FILENO);
+		ft_putstr_fd(">outfile: Error\n", STDERR_FILENO);
 		return (1);
 	}
 	if (fd > 0 && dup2(fd, 1) < 0)
 	{
-		ft_putstr_fd("minishell: pipe error\n", STDERR_FILENO);
+		ft_putstr_fd(">pipe error\n", STDERR_FILENO);
 		return (1);
 	}
 	if (fd > 0)
@@ -43,38 +43,38 @@ int	init_outfile(t_lexer *redirection)
 	return (0);
 }
 
-int     init_infile(char *file)
+int	init_infile(char *file)
 {
-    int fd;
+	int	fd;
 
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 	{
-		ft_putstr_fd("infile: No such file or directory\n", 2);
+		ft_putstr_fd(">infile: No such file or directory\n", 2);
 		return (1);
 	}
 	if (fd > 0 && dup2(fd, 0) < 0)
 	{
-		ft_putstr_fd("pipe error\n", 2);
-		return (1);		
+		ft_putstr_fd(">pipe error\n", 2);
+		return (1);
 	}
 	if (fd > 0)
 		close (fd);
 	return (0);
 }
 
-int     init_redirs(t_cmds_infos *cmd)
+int	init_redirs(t_cmds_infos *cmd)
 {
-    t_lexer	*start;
+	t_lexer	*start;
 
 	start = cmd->redir;
-    while (cmd->redir)
-    {
-        if (cmd->redir->token == LESS)
-        {		
+	while (cmd->redir)
+	{
+		if (cmd->redir->token == LESS)
+		{
 			if (init_infile(cmd->redir->arg))
 				return (1);
-        }
+		}
 		else if (cmd->redir->token == GREAT || cmd->redir->token == TWO_GREAT)
 		{
 			if (init_outfile(cmd->redir))
@@ -86,7 +86,7 @@ int     init_redirs(t_cmds_infos *cmd)
 				return (1);
 		}
 		cmd->redir = cmd->redir->next;
-    }
+	}
 	cmd->redir = start;
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 15:59:50 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/22 01:47:50 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/25 22:43:18 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,6 @@ void	ft_putendl_fd(char *s, int fd);
 char	**ft_split(char const *s, char c);
 void	ft_putstr_fd(char *s, int fd);
 size_t	ft_strlen(const char *str);
-char		*get_next_line(int fd);
+char	*get_next_line(int fd);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 01:41:27 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/25 05:54:01 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/25 22:24:57 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 int	init_infos(t_infos *infos)
 {
 	infos->pid = NULL;
-    infos->lexers = NULL;
-    infos->cmds_infos = NULL;
-    infos->reset = 0;
-    infos->here_doc = 0;
-    global.stop_here_doc = 0;
-    global.in_cmd = 0;
-    global.in_here_doc = 0;
+	infos->lexers = NULL;
+	infos->cmds_infos = NULL;
+	infos->reset = 0;
+	infos->here_doc = 0;
+	g_global.stop_here_doc = 0;
+	g_global.in_cmd = 0;
+	g_global.in_here_doc = 0;
 	set_path(infos);
 	return (1);
 }
@@ -29,7 +29,8 @@ int	init_infos(t_infos *infos)
 int	main(int ac, char **av, char **env)
 {
 	t_infos	infos;
-	if(ac != 1 || av[1])
+
+	if (ac != 1 || av[1])
 	{
 		printf("Too many arguments\n");
 		return (0);

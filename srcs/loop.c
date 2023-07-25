@@ -6,13 +6,30 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 18:19:13 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/25 07:30:55 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/25 22:26:18 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-t_global global;
+t_g_global	g_global;
+
+t_cmds_infos	*call_expand(t_infos *infos, t_cmds_infos *cmd)
+{
+	t_lexer	*start;
+
+	cmd->str = expand(infos, cmd->str);
+	start = cmd->redir;
+	while (cmd->redir)
+	{
+		if (cmd->redir->token != TWO_LESS)
+			cmd->redir->arg
+				= expand_str(infos, cmd->redir->arg);
+		cmd->redir = cmd->redir->next;
+	}
+	cmd->redir = start;
+	return (cmd);
+}
 
 int	reset_infos(t_infos *infos)
 {
@@ -29,7 +46,7 @@ int	reset_infos(t_infos *infos)
 
 int	check_execute(t_infos *infos)
 {
-	global.in_cmd = 1;
+	g_global.in_cmd = 1;
 	if (infos->pipes == 0)
 		one_cmd(infos->cmds_infos, infos);
 	else
@@ -39,14 +56,14 @@ int	check_execute(t_infos *infos)
 			return (ft_error(1, infos));
 		large_execute(infos);
 	}
-	global.in_cmd = 0;
+	g_global.in_cmd = 0;
 	return (0);
 }
 
 int	main_loop(t_infos *infos)
 {
-	char *tmp;
-	
+	char	*tmp;
+
 	infos->args = readline("minishell>");
 	tmp = ft_strtrim(infos->args, " ");
 	free(infos->args);
@@ -59,10 +76,10 @@ int	main_loop(t_infos *infos)
 	if (infos->args[0] == '\0')
 		return (reset_infos(infos));
 	add_history(infos->args);
-	if(!check_quotes(infos->args))
+	if (!check_quotes(infos->args))
 		return (ft_error(2, infos));
-	if(!set_token(infos))
-		return(ft_error(1, infos));
+	if (!set_token(infos))
+		return (ft_error(1, infos));
 	parser(infos);
 	check_execute(infos);
 	reset_infos(infos);

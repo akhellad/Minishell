@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 20:24:50 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/22 20:43:03 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/25 22:39:54 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	**find_path(char **envp)
 	return (paths);
 }
 
-int set_path(t_infos *infos)
+int	set_path(t_infos *infos)
 {
 	int		i;
 	char	*part_path;
@@ -33,13 +33,13 @@ int set_path(t_infos *infos)
 	i = 0;
 	while (infos->paths[i])
 	{
-        if (ft_strncmp(&infos->paths[i][ft_strlen(infos->paths[i]) - 1],
-		"/", 1) != 0)
-        {
-		    part_path = ft_strjoin(infos->paths[i], "/");
-		    free(infos->paths[i]);
-            infos->paths[i] = part_path;
-        }
+		if (ft_strncmp(&infos->paths[i][ft_strlen(infos->paths[i]) - 1], \
+			"/", 1) != 0)
+		{
+			part_path = ft_strjoin(infos->paths[i], "/");
+			free(infos->paths[i]);
+			infos->paths[i] = part_path;
+		}
 		i++;
 	}
 	return (0);

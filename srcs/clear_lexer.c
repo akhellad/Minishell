@@ -24,7 +24,7 @@ t_lexer	*ft_clearlexer_one(t_lexer **lexers)
 	return (NULL);
 }
 
-void	 ft_dellexer_first(t_lexer **lexers)
+void	ft_dellexer_first(t_lexer **lexers)
 {
 	t_lexer	*node;
 
@@ -45,7 +45,7 @@ void	ft_dellexer_one(t_lexer **lexers, int key)
 	node = start;
 	if ((*lexers)->index == key)
 	{
-		 ft_dellexer_first(lexers);
+		ft_dellexer_first(lexers);
 		return ;
 	}
 	while (node && node->index != key)

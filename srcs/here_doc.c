@@ -6,21 +6,22 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 23:22:21 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/25 00:41:17 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/25 23:07:46 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	display_here_doc(t_lexer *hd_infos, int quotes, t_infos *infos, char *filename)
+int	display_here_doc(t_lexer *hd_infos, int quotes, t_infos *infos, \
+					char *filename)
 {
 	int		fd;
 	char	*arg;
 
 	fd = open(filename, O_CREAT | O_RDWR | O_TRUNC, 0664);
 	arg = readline(">");
-	while (arg && ft_strncmp(hd_infos->arg, arg, ft_strlen(hd_infos->arg))
-			&& !global.stop_here_doc)
+	while (arg && ft_strncmp(hd_infos->arg, arg, ft_strlen(hd_infos->arg)) \
+			&& !g_global.stop_here_doc)
 	{
 		if (quotes == 0)
 			arg = expand_str(infos, arg);
@@ -30,10 +31,24 @@ int	display_here_doc(t_lexer *hd_infos, int quotes, t_infos *infos, char *filena
 		arg = readline(">");
 	}
 	free(arg);
-	if (global.stop_here_doc || !arg)
+	if (g_global.stop_here_doc || !arg)
 		return (1);
 	close(fd);
 	return (0);
+}
+
+int	check_fd_heredoc(t_infos *infos, int end[2], t_cmds_infos *cmd)
+{
+	int	in_fd;
+
+	if (infos->here_doc)
+	{
+		close(end[0]);
+		in_fd = open(cmd->hd_filename, O_RDONLY);
+	}
+	else
+		in_fd = end[0];
+	return (in_fd);
 }
 
 int	here_doc(t_infos *infos, t_lexer *hd_infos, char *filename)
@@ -51,10 +66,10 @@ int	here_doc(t_infos *infos, t_lexer *hd_infos, char *filename)
 		quotes = 0;
 	del_quotes(hd_infos->arg, '\'');
 	del_quotes(hd_infos->arg, '\"');
-	global.stop_here_doc = 0;
-	global.in_here_doc = 1;
+	g_global.stop_here_doc = 0;
+	g_global.in_here_doc = 1;
 	exit_code = display_here_doc(hd_infos, quotes, infos, filename);
-	global.in_here_doc = 0;
+	g_global.in_here_doc = 0;
 	infos->here_doc = 1;
 	return (exit_code);
 }
@@ -62,23 +77,23 @@ int	here_doc(t_infos *infos, t_lexer *hd_infos, char *filename)
 char	*here_doc_filename(void)
 {
 	static int	i = 0;
-	char	*index;
-	char	*filename;
+	char		*index;
+	char		*filename;
 
 	index = ft_itoa(i++);
 	filename = ft_strjoin(".tmp_heredoc_file_", index);
 	free(index);
-	return(filename);
+	return (filename);
 }
 
-int check_here_doc(t_infos *infos, t_cmds_infos *cmd)
+int	check_here_doc(t_infos *infos, t_cmds_infos *cmd)
 {
-	t_lexer *first;
+	t_lexer	*first;
 	int		exit_code;
 
 	first = cmd->redir;
 	exit_code = 0;
-	while(cmd->redir)
+	while (cmd->redir)
 	{
 		if (cmd->redir->token == TWO_LESS)
 		{
@@ -88,7 +103,7 @@ int check_here_doc(t_infos *infos, t_cmds_infos *cmd)
 			exit_code = here_doc(infos, cmd->redir, cmd->hd_filename);
 			if (exit_code)
 			{
-				global.error_num = 1;
+				g_global.error_num = 1;
 				return (reset_infos(infos));
 			}
 		}

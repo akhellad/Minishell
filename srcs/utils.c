@@ -6,13 +6,13 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 06:53:48 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/25 07:26:32 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/25 22:20:10 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int		count_args(t_lexer	*lexers)
+int	count_args(t_lexer	*lexers)
 {
 	t_lexer	*tmp;
 	int		i;

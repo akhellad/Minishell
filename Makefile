@@ -6,7 +6,7 @@
 #    By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/22 01:40:01 by akhellad          #+#    #+#              #
-#    Updated: 2023/07/25 07:28:02 by akhellad         ###   ########.fr        #
+#    Updated: 2023/07/25 21:36:12 by akhellad         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,8 @@ SRCS 	= srcs/main.c \
 		srcs/lexers_utils.c \
 		srcs/quotes.c \
 		srcs/spaces.c \
-		srcs/cmds_infos.c
+		srcs/cmds_infos.c \
+		srcs/expand_utils.c
 
 OBJS 	= ${SRCS:.c=.o}
 
