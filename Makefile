@@ -6,69 +6,73 @@
 #    By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/22 01:40:01 by akhellad          #+#    #+#              #
-#    Updated: 2023/07/25 21:36:12 by akhellad         ###   ########.fr        #
+#    Updated: 2023/07/25 23:28:44 by akhellad         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= minishell
+NAME    = minishell
 
-SRCS 	= srcs/main.c \
-		srcs/execute.c \
-		srcs/execute_utils.c \
-		srcs/lexers.c \
-		srcs/utils.c \
-		srcs/loop.c \
-		srcs/envp.c \
-		srcs/parser.c \
-		srcs/clear_lexer.c \
-		srcs/errors.c \
-		srcs/redirs.c \
-		srcs/expand.c \
-		srcs/check_files.c \
-		srcs/here_doc.c \
-		srcs/large_execute.c \
-		srcs/lexers_utils.c \
-		srcs/quotes.c \
-		srcs/spaces.c \
-		srcs/cmds_infos.c \
-		srcs/expand_utils.c
+SRCS_DIR = srcs/
+OBJS_DIR = objs/
 
-OBJS 	= ${SRCS:.c=.o}
+SRCS    = main.c \
+          execute.c \
+          execute_utils.c \
+          lexers.c \
+          utils.c \
+          loop.c \
+          envp.c \
+          parser.c \
+          clear_lexer.c \
+          errors.c \
+          redirs.c \
+          expand.c \
+          check_files.c \
+          here_doc.c \
+          large_execute.c \
+          lexers_utils.c \
+          quotes.c \
+          spaces.c \
+          cmds_infos.c \
+          expand_utils.c
 
-HEADER	= -Iincludes
+OBJS    = $(addprefix $(OBJS_DIR),$(SRCS:.c=.o))
+
+HEADER  = -Iincludes
 LIBFT   = -Llibft -lft
-INC		= includes/*.h libft/includes/libft.h
+INC     = includes/*.h libft/includes/libft.h
 
-CC 		= gcc
-CFLAGS 	= -g3 
+CC      = gcc
+CFLAGS  = -g3 
 
 LIB_A   = libft/libft.a
 
 
-all: 		${NAME}
+all:        ${NAME}
 
-${LIB_A}:	force libft/includes/libft.h
+${LIB_A}:   force libft/includes/libft.h
 			@make all -C ./libft
 
-${NAME}:	${OBJS} ${LIB_A}
-					@echo "\033[0;34m[OK] \033[0m       \033[0;33m Created  \033[0m: ${NAME}" 
-					@$(CC) ${OBJS} -Llibft -lft -lreadline -o ${NAME}
+${NAME}:    ${OBJS} ${LIB_A}
+			@echo "\033[0;34m[OK] \033[0m       \033[0;33m Created  \033[0m: ${NAME}" 
+			@$(CC) ${OBJS} -Llibft -lft -lreadline -o ${NAME}
 
-${OBJS}: %.o: %.c Makefile ${INC} 
-				@echo "\033[33;32m[OK] \033[0m       \033[0;33m Compiling:\033[0m" $<
-				@$(CC) ${CFLAGS} ${HEADER} -c $< -o $@
+$(OBJS_DIR)%.o: $(SRCS_DIR)%.c Makefile ${INC} 
+			@mkdir -p $(OBJS_DIR)
+			@echo "\033[33;32m[OK] \033[0m       \033[0;33m Compiling:\033[0m" $<
+			@$(CC) ${CFLAGS} ${HEADER} -c $< -o $@
 
 clean:
-					@echo "\033[0;31m[OK] \033[0m       \033[0;33m Deleted  \033[0m: ${OBJS}"
-					@make clean -C ./libft
-					@rm -f ${OBJS}
+			@echo "\033[0;31m[OK] \033[0m       \033[0;33m Deleted  \033[0m: ${OBJS}"
+			@make clean -C ./libft
+			@rm -f ${OBJS}
 
-fclean: 	clean
-					@echo "\033[0;31m[OK] \033[0m       \033[0;33m Deleted  \033[0m: ${NAME}"
-					@make fclean -C ./libft
-					@rm -f ${NAME}
+fclean:    	clean
+			@echo "\033[0;31m[OK] \033[0m       \033[0;33m Deleted  \033[0m: ${NAME}"
+			@make fclean -C ./libft
+			@rm -f ${NAME}
+			@rm -rf $(OBJS_DIR)
 
-re:			fclean all
-
+re:         fclean all
 
 .PHONY: all clean fclean re force
