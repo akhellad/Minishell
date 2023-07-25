@@ -6,7 +6,7 @@
 #    By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/22 01:40:01 by akhellad          #+#    #+#              #
-#    Updated: 2023/07/25 03:40:37 by akhellad         ###   ########.fr        #
+#    Updated: 2023/07/25 05:59:07 by akhellad         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME	= minishell
 
 SRCS 	= srcs/main.c \
 		srcs/execute.c \
-		srcs/history.c \
+		srcs/execute_utils.c \
 		srcs/parser.c \
 		srcs/utils.c \
 		srcs/loop.c \
@@ -25,7 +25,10 @@ SRCS 	= srcs/main.c \
 		srcs/redirs.c \
 		srcs/expand.c \
 		srcs/check_files.c \
-		srcs/here_doc.c
+		srcs/here_doc.c \
+		srcs/large_execute.c \
+		srcs/lexers_utils.c \
+		srcs/quotes.c
 
 OBJS 	= ${SRCS:.c=.o}
 

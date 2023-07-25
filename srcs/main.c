@@ -6,50 +6,22 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 01:41:27 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/24 03:18:18 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/25 05:54:01 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void display_tokens(t_lexer* head) {
-    t_lexer* current = head;
-
-    printf("Contenu de la liste : \n");
-    while (current != NULL) {
-        if (current->token != 0) {
-            switch (current->token) {
-                case PIPE:
-                    printf("| ");
-                    break;
-                case GREAT:
-                    printf("> ");
-                    break;
-                case TWO_GREAT:
-                    printf(">> ");
-                    break;
-                case LESS:
-                    printf("< ");
-                    break;
-                case TWO_LESS:
-                    printf("<< ");
-                    break;
-                default:
-                    break;
-            }
-            printf("\n");
-        }
-        else
-            printf("%s\n", current->arg);
-        current = current->next;
-    }
-//	printf("\n");
-}
-
 int	init_infos(t_infos *infos)
 {
 	infos->pid = NULL;
     infos->lexers = NULL;
+    infos->cmds_infos = NULL;
+    infos->reset = 0;
+    infos->here_doc = 0;
+    global.stop_here_doc = 0;
+    global.in_cmd = 0;
+    global.in_here_doc = 0;
 	set_path(infos);
 	return (1);
 }

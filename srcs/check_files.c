@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 22:05:56 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/25 03:39:34 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/25 04:32:27 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int     init_redirs(t_cmds_infos *cmd)
         }
 		else if (cmd->redir->token == GREAT || cmd->redir->token == TWO_GREAT)
 		{
-			if (init_outfile(cmd->redir));
+			if (init_outfile(cmd->redir))
 				return (1);
 		}
 		if (cmd->redir->token == TWO_LESS)

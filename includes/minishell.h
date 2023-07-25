@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 01:41:30 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/25 00:40:11 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/25 06:01:14 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct	s_infos
 	int		here_doc;
 	struct s_cmds_infos	*cmds_infos;
 	int		pipes;
+	int		reset;
 	t_lexer	*lexers;
 }		t_infos;
 
@@ -86,19 +87,15 @@ void display_tokens(t_lexer* head);
 
 /*excute.c*/
 void	one_cmd(t_cmds_infos *cmd, t_infos *infos);
+void	sort_cmd(t_cmds_infos *cmd, t_infos *infos);
 
 /*history.c*/
 
 /*utils.c*/
-t_lexer *ft_newlexer(char *str, int token);
-void    ft_addlexer_back(t_lexer **lexers, t_lexer *new);
 char	**ft_arrdup(char **arr);
 void	free_arr(char **split_arr);
-int		check_quotes(char *str);
-int		ft_error(int error, t_infos *infos);
 int		count_args(t_lexer	*lexers);
 void	ft_cmdsinfo_clear(t_cmds_infos **lst);
-char	*del_quotes(char *str, char c);
 
 /*parser.c*/
 t_tokens    is_token(int c);
@@ -125,6 +122,7 @@ t_lexer *ft_clearlexer_one(t_lexer  **lexers);
 /*errors.c*/
 int	double_token_error(t_infos *infos, t_lexer *lexers, t_tokens token);
 void	parser_error(int error, t_infos *infos, t_lexer *lexers);
+int		ft_error(int error, t_infos *infos);
 
 /*redirs.c*/
 void    sort_redirs(t_parser_infos *parser_infos);
@@ -139,6 +137,21 @@ int     init_redirs(t_cmds_infos *cmd);
 
 /*here_doc.c*/
 int check_here_doc(t_infos *infos, t_cmds_infos *cmd);
+
+/*large_execute.c*/
+int large_execute(t_infos *infos);
+
+/*execute_utils.c*/
+char	**resplit_str(char **double_arr);
+
+/*lexers_utils.c*/
+t_lexer *ft_newlexer(char *str, int token);
+void    ft_addlexer_back(t_lexer **lexers, t_lexer *new);
+
+/*quotes.c*/
+int		check_quotes(char *str);
+int	check_double_quotes(char *str, int i, int *quotes_nbr, int quotes);
+char	*del_quotes(char *str, char c);
 
 
 #endif
