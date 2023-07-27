@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agaley <agaley@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 03:00:03 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/25 22:38:17 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/28 00:20:07 by agaley           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	one_cmd(t_cmds_infos *cmd, t_infos *infos)
 	check_here_doc(infos, cmd);
 	pid = fork();
 	if (pid < 0)
-		ft_error(5, infos);
+		ft_error(ERR_FORK, infos);
 	if (pid == 0)
 		sort_cmd(cmd, infos);
 	waitpid(pid, &status, 0);
