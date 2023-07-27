@@ -6,7 +6,7 @@
 /*   By: agaley <agaley@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 09:13:07 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/28 00:34:22 by agaley           ###   ########lyon.fr   */
+/*   Updated: 2023/07/28 01:26:44 by agaley           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,7 @@ int	ft_error(int error, t_infos *infos)
 {
 	ft_putstr_fd(">", STDERR_FILENO);
 	if (error == ERR_NEWLINE)
-		ft_putstr_fd("syntax error near unexpected token 'newline'\n",
-			STDERR_FILENO);
+		ft_putstr_fd("syntax error near unexpected token 'newline'\n", 2);
 	else if (error == ERR_MEMORY)
 		ft_putstr_fd("memory error: unable to assign memory\n", STDERR_FILENO);
 	else if (error == ERR_QUOTES)
@@ -65,7 +64,8 @@ int	ft_error(int error, t_infos *infos)
 		ft_putendl_fd("Path does not exist", STDERR_FILENO);
 	else if (error == ERR_PERM)
 		ft_putendl_fd("Permission denied", STDERR_FILENO);
-	reset_infos(infos);
+	if (infos)
+		reset_infos(infos);
 	return (EXIT_FAILURE);
 }
 
