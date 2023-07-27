@@ -6,7 +6,7 @@
 /*   By: agaley <agaley@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 01:41:30 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/28 00:30:25 by agaley           ###   ########lyon.fr   */
+/*   Updated: 2023/07/28 00:34:13 by agaley           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ extern t_g_global	g_global;
 # define ERR_OUTFILE 6
 # define ERR_INFILE 7
 # define ERR_PATH 8
+# define ERR_PERM 9
 
 /*main.c*/
 int				init_infos(t_infos *infos);

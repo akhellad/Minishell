@@ -6,7 +6,7 @@
 /*   By: agaley <agaley@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 09:13:07 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/28 00:30:11 by agaley           ###   ########lyon.fr   */
+/*   Updated: 2023/07/28 00:34:22 by agaley           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ int	ft_error(int error, t_infos *infos)
 		ft_putstr_fd("infile: No such file or directory\n", STDERR_FILENO);
 	else if (error == ERR_PATH)
 		ft_putendl_fd("Path does not exist", STDERR_FILENO);
+	else if (error == ERR_PERM)
+		ft_putendl_fd("Permission denied", STDERR_FILENO);
 	reset_infos(infos);
 	return (EXIT_FAILURE);
 }
