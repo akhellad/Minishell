@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 23:48:52 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/28 01:56:31 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/28 04:29:07 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ char    *find_equal_path(char *str, t_infos *infos)
 					ft_strlen(infos->envp[i]) - ft_strlen(str)));
         i++;
     }
+	return (NULL);
 }
 
 int preset_path(t_infos *infos, char *str)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agaley <agaley@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 18:19:13 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/28 00:22:49 by agaley           ###   ########lyon.fr   */
+/*   Updated: 2023/07/28 04:08:12 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	main_loop(t_infos *infos)
 {
 	char	*tmp;
 
-	infos->args = readline("minishell>");
+	infos->args = readline("\033[1;35mminishell\033[34m> \033[0m");
 	tmp = ft_strtrim(infos->args, " ");
 	free(infos->args);
 	infos->args = tmp;

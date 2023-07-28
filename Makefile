@@ -6,7 +6,7 @@
 #    By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/22 01:40:01 by akhellad          #+#    #+#              #
-#    Updated: 2023/07/28 00:11:13 by akhellad         ###   ########.fr        #
+#    Updated: 2023/07/28 04:25:46 by akhellad         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ NAME    = minishell
 
 SRCS_DIR = srcs/
 OBJS_DIR = objs/
+TMP_DIR = tmp/
 
 SRCS    = main.c \
           execute.c \
@@ -45,17 +46,20 @@ LIBFT   = -Llibft -lft
 INC     = includes/*.h libft/includes/libft.h
 
 CC      = gcc
-CFLAGS  = -g3 
+CFLAGS  = -Wall -Wextra -Werror -g3 
 
 LIB_A   = libft/libft.a
 
 
 all:        ${NAME}
 
+tmp:        force
+			@mkdir -p $(TMP_DIR)
+
 ${LIB_A}:   force libft/includes/libft.h
 			@make all -C ./libft
 
-${NAME}:    ${OBJS} ${LIB_A}
+${NAME}:    ${OBJS} ${LIB_A} tmp
 			@echo "\033[0;34m[OK] \033[0m       \033[0;33m Created  \033[0m: ${NAME}" 
 			@$(CC) ${OBJS} -Llibft -lft -lreadline -o ${NAME}
 
@@ -68,6 +72,7 @@ clean:
 			@echo "\033[0;31m[OK] \033[0m       \033[0;33m Deleted  \033[0m: ${OBJS}"
 			@make clean -C ./libft
 			@rm -f ${OBJS}
+			@rm -rf ${TMP_DIR}
 
 fclean:    	clean
 			@echo "\033[0;31m[OK] \033[0m       \033[0;33m Deleted  \033[0m: ${NAME}"

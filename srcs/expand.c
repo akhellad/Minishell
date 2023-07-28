@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 05:00:41 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/25 22:36:27 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/28 04:28:37 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ char	*handle_dollar(t_infos *infos, char *str)
 			j += dollar_loop(infos, str, &tmp, j);
 		else
 		{
-			tmp = char_to_str(str[j++]);
+			tmp2 = char_to_str(str[j++]);
 			tmp3 = ft_strjoin(tmp, tmp2);
 			free(tmp);
 			tmp = tmp3;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agaley <agaley@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 09:13:07 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/28 01:26:44 by agaley           ###   ########lyon.fr   */
+/*   Updated: 2023/07/28 04:19:06 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	parser_error(int error, t_infos *infos, t_lexer *lexers)
 int	double_token_error(t_infos *infos, t_lexer *lexers,
 	t_tokens token)
 {
-	ft_putstr_fd(">syntax error near unexpected token ",
+	ft_putstr_fd("syntax error near unexpected token ",
 		STDERR_FILENO);
 	if (token == GREAT)
 		ft_putstr_fd("'>'\n", STDERR_FILENO);
@@ -42,7 +42,6 @@ int	double_token_error(t_infos *infos, t_lexer *lexers,
 
 int	ft_error(int error, t_infos *infos)
 {
-	ft_putstr_fd(">", STDERR_FILENO);
 	if (error == ERR_NEWLINE)
 		ft_putstr_fd("syntax error near unexpected token 'newline'\n", 2);
 	else if (error == ERR_MEMORY)

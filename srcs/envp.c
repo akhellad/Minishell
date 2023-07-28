@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 20:24:50 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/28 01:37:43 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/28 04:26:03 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 char	*find_path(char **envp)
 {
 	int		i;
-	char	**paths;
 
 	i = 0;
 	while (envp[i])

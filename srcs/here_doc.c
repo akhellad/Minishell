@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 23:22:21 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/25 23:07:46 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/28 04:32:14 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	display_here_doc(t_lexer *hd_infos, int quotes, t_infos *infos, \
 	char	*arg;
 
 	fd = open(filename, O_CREAT | O_RDWR | O_TRUNC, 0664);
-	arg = readline(">");
+	arg = readline("\033[1;34m> \033[0m");
 	while (arg && ft_strncmp(hd_infos->arg, arg, ft_strlen(hd_infos->arg)) \
 			&& !g_global.stop_here_doc)
 	{
@@ -28,7 +28,7 @@ int	display_here_doc(t_lexer *hd_infos, int quotes, t_infos *infos, \
 		write(fd, arg, ft_strlen(arg));
 		write(fd, "\n", 1);
 		free(arg);
-		arg = readline(">");
+		arg = readline("\033[1;34m> \033[0m");
 	}
 	free(arg);
 	if (g_global.stop_here_doc || !arg)
@@ -81,7 +81,7 @@ char	*here_doc_filename(void)
 	char		*filename;
 
 	index = ft_itoa(i++);
-	filename = ft_strjoin(".tmp_heredoc_file_", index);
+	filename = ft_strjoin("tmp/.tmp_heredoc_file_", index);
 	free(index);
 	return (filename);
 }
