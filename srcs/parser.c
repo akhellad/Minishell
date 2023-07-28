@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agaley <agaley@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 08:19:58 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/25 22:24:12 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/29 00:26:00 by agaley           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_cmds_infos	*init_cmd(t_parser_infos *parser_infos)
 	args_nbr = count_args(parser_infos->lexers);
 	args = ft_calloc(args_nbr + 1, sizeof(char *));
 	if (!args)
-		parser_error(1, parser_infos->infos, parser_infos->lexers);
+		parser_error(ERR_PARSER, parser_infos->infos, parser_infos->lexers);
 	tmp = parser_infos->lexers;
 	while (args_nbr > 0)
 	{

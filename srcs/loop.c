@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agaley <agaley@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 18:19:13 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/28 04:08:12 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/29 00:15:26 by agaley           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ t_cmds_infos	*call_expand(t_infos *infos, t_cmds_infos *cmd)
 	while (cmd->redir)
 	{
 		if (cmd->redir->token != TWO_LESS)
-			cmd->redir->arg
-				= expand_str(infos, cmd->redir->arg);
+			cmd->redir->arg = expand_str(infos, cmd->redir->arg);
 		cmd->redir = cmd->redir->next;
 	}
 	cmd->redir = start;

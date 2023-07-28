@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirs.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agaley <agaley@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 21:42:38 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/25 23:08:00 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/29 00:27:15 by agaley           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	add_new_redirs(t_lexer *tmp, t_parser_infos *parser_infos)
 
 	node = ft_newlexer(ft_strdup(tmp->next->arg), tmp->token);
 	if (!node)
-		parser_error(1, parser_infos->infos, parser_infos->lexers);
+		parser_error(ERR_PARSER, parser_infos->infos, parser_infos->lexers);
 	ft_addlexer_back(&parser_infos->redir, node);
 	index_1 = tmp->index;
 	index_2 = tmp->next->index;
