@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agaley <agaley@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 18:19:13 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/25 22:26:18 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/28 00:22:49 by agaley           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	check_execute(t_infos *infos)
 	{
 		infos->pid = ft_calloc(sizeof(int), infos->pipes + 2);
 		if (!infos->pid)
-			return (ft_error(1, infos));
+			return (ft_error(ERR_MEMORY, infos));
 		large_execute(infos);
 	}
 	g_global.in_cmd = 0;
@@ -77,9 +77,9 @@ int	main_loop(t_infos *infos)
 		return (reset_infos(infos));
 	add_history(infos->args);
 	if (!check_quotes(infos->args))
-		return (ft_error(2, infos));
+		return (ft_error(ERR_QUOTES, infos));
 	if (!set_token(infos))
-		return (ft_error(1, infos));
+		return (ft_error(ERR_MEMORY, infos));
 	parser(infos);
 	check_execute(infos);
 	reset_infos(infos);

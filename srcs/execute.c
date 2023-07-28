@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 03:00:03 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/28 00:08:48 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/28 03:57:04 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	one_cmd(t_cmds_infos *cmd, t_infos *infos)
 	check_here_doc(infos, cmd);
 	pid = fork();
 	if (pid < 0)
-		ft_error(5, infos);
+		ft_error(ERR_FORK, infos);
 	if (pid == 0)
 		sort_cmd(cmd, infos);
 	waitpid(pid, &status, 0);

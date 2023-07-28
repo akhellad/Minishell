@@ -3,22 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   large_execute.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agaley <agaley@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 04:42:49 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/25 22:32:52 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/28 00:21:54 by agaley           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
 void	cmd_dup(t_cmds_infos *cmd, t_infos *infos, int end[2], int in_fd)
+
 {
 	if (cmd->prev && dup2(in_fd, 0) < 0)
-		ft_error(4, infos);
+		ft_error(ERR_PIPE, infos);
 	close(end[0]);
 	if (cmd->next && dup2(end[1], 1) < 0)
-		ft_error(4, infos);
+		ft_error(ERR_PIPE, infos);
 	close(end[1]);
 	if (cmd->prev)
 		close(in_fd);
@@ -36,7 +37,7 @@ int	ft_fork(t_infos *infos, int end[2], int in_fd, t_cmds_infos *cmd)
 	}
 	infos->pid[i] = fork();
 	if (infos->pid[i] < 0)
-		ft_error(5, infos);
+		ft_error(ERR_FORK, infos);
 	if (infos->pid[i] == 0)
 		cmd_dup(cmd, infos, end, in_fd);
 	i++;

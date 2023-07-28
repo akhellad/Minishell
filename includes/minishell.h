@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 01:41:30 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/28 01:45:54 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/28 03:56:15 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <limits.h>
+# include <errno.h>
 
 typedef enum s_tokens
 {
@@ -84,6 +85,18 @@ typedef struct s_g_global
 
 extern t_g_global	g_global;
 int	(*init_builtins(char *str))(t_infos *infos, t_cmds_infos *cmds_infos);
+
+/* Error codes */
+# define ERR_NEWLINE 0
+# define ERR_MEMORY 1
+# define ERR_QUOTES 2
+# define ERR_PARSER 3
+# define ERR_PIPE 4
+# define ERR_FORK 5
+# define ERR_OUTFILE 6
+# define ERR_INFILE 7
+# define ERR_PATH 8
+# define ERR_PERM 9
 
 /*main.c*/
 int				init_infos(t_infos *infos);
