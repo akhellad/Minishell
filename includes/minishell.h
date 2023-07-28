@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 01:41:30 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/28 03:56:15 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/28 05:03:47 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,5 +192,9 @@ size_t			find_equal(char *str);
 
 /*cd_built.c*/
 int				cd_built(t_infos *infos, t_cmds_infos *cmd_infos);
+
+/*env_built.c*/
+int 			env_built(t_infos *infos, t_cmds_infos *cmd_infos);
+int				pwd_built(t_infos *infos, t_cmds_infos *cmd_infos);
 
 #endif

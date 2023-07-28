@@ -1,36 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.c                                         :+:      :+:    :+:   */
+/*   env_built.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/27 23:40:21 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/28 05:04:01 by akhellad         ###   ########.fr       */
+/*   Created: 2023/07/28 04:54:35 by akhellad          #+#    #+#             */
+/*   Updated: 2023/07/28 05:03:25 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int (*init_builtins(char *str))(t_infos *infos, t_cmds_infos *cmd_infos)
+int env_built(t_infos *infos, t_cmds_infos *cmd_infos)
 {
-    static void *builtins[3][2] = 
-    {
-        {"cd", cd_built},
-        {"env", env_built},
-        {"pwd", pwd_built},
-    };
-    int         i;
+    int i;
 
+    (void)cmd_infos;
     i = 0;
-    while (i < 3)
+    while (infos->envp[i])
     {
-        if (str)
-        {
-            if (!ft_strncmp(builtins[i][0], str, ft_strlen((builtins[i][0]))))
-                return (builtins[i][1]);
-        }
+        ft_putendl_fd(infos->envp[i], 1);
         i++;
     }
-    return (NULL);
+    return (0);
+}
+
+int	pwd_built(t_infos *infos, t_cmds_infos *cmd_infos)
+{
+	(void) cmd_infos;
+	ft_putendl_fd(infos->pwd, 1);
+	return (0);
 }
