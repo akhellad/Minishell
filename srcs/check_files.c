@@ -6,7 +6,7 @@
 /*   By: agaley <agaley@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 22:05:56 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/28 01:36:16 by agaley           ###   ########lyon.fr   */
+/*   Updated: 2023/07/28 02:00:53 by agaley           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,11 @@ int	init_outfile(t_lexer *redirection)
 	{
 		if (errno == EACCES)
 			return (ft_error(ERR_PERM, NULL));
-		else
-			return (ft_error(ERR_OUTFILE, NULL));
+		return (ft_error(ERR_OUTFILE, NULL));
 	}
-	if (fd > 0 && dup2(fd, 1) < 0)
-		return (ft_error(ERR_PIPE, NULL));
-	if (fd > 0)
-		close(fd);
-	return (0);
+	if (dup2(fd, 1) < 0)
+		return (close(fd), ft_error(ERR_PIPE, NULL));
+	return (close(fd), 0);
 }
 
 int	init_infile(char *file)
@@ -51,14 +48,11 @@ int	init_infile(char *file)
 	{
 		if (errno == EACCES)
 			return (ft_error(ERR_PERM, NULL));
-		else
-			return (ft_error(ERR_INFILE, NULL));
+		return (ft_error(ERR_INFILE, NULL));
 	}
-	if (fd > 0 && dup2(fd, 0) < 0)
-		return (ft_error(ERR_PIPE, NULL));
-	if (fd > 0)
-		close (fd);
-	return (0);
+	if (dup2(fd, 0) < 0)
+		return (close(fd), ft_error(ERR_PIPE, NULL));
+	return (close(fd), 0);
 }
 
 int	init_redirs(t_cmds_infos *cmd)
