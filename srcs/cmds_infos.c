@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 07:23:43 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/25 22:40:19 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/28 02:07:24 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ t_cmds_infos	*ft_cmds_infonew(char **str, int redir_nbr, \
 	if (!new)
 		return (0);
 	new->str = str;
+	new->builtins = init_builtins(str[0]);
 	new->hd_filename = NULL;
 	new->redir_nbr = redir_nbr;
 	new->redir = redirections;

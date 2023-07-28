@@ -6,30 +6,36 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 20:24:50 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/25 22:39:54 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/28 01:37:43 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-char	**find_path(char **envp)
+char	*find_path(char **envp)
 {
 	int		i;
 	char	**paths;
 
 	i = 0;
-	while (ft_strnstr(envp[i], "PATH", 4) == 0)
+	while (envp[i])
+	{
+		if (!ft_strncmp(envp[i], "PATH=", 5))
+			return (ft_substr(envp[i], 5, ft_strlen(envp[i]) - 5));
 		i++;
-	paths = ft_split(envp[i] + 5, ':');
-	return (paths);
+	}
+	return (ft_strdup("\0"));
 }
 
 int	set_path(t_infos *infos)
 {
 	int		i;
+	char	*long_path;
 	char	*part_path;
 
-	infos->paths = find_path(infos->envp);
+	long_path = find_path(infos->envp);
+	infos->paths = ft_split(long_path, ':');
+	free(long_path);
 	i = 0;
 	while (infos->paths[i])
 	{

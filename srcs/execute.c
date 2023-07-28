@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 03:00:03 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/25 22:38:17 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/28 00:08:48 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,11 @@ void	sort_cmd(t_cmds_infos *cmd, t_infos *infos)
 	if (cmd->redir)
 		if (init_redirs(cmd))
 			exit (1);
+	if (cmd->builtins != NULL)
+	{
+		exit_code = cmd->builtins(infos, cmd);
+		exit(exit_code);
+	}
 	if (cmd->str[0][0] != '\0')
 		exit_code = execute(cmd, infos);
 	exit(exit_code);
@@ -59,6 +64,11 @@ void	one_cmd(t_cmds_infos *cmd, t_infos *infos)
 	int	status;
 
 	infos->cmds_infos = call_expand(infos, infos->cmds_infos);
+	if (cmd->builtins == cd_built)
+	{
+		g_global.error_num = cmd->builtins(infos, cmd);
+		return ;
+	}
 	check_here_doc(infos, cmd);
 	pid = fork();
 	if (pid < 0)

@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 01:41:30 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/25 22:19:43 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/28 01:45:54 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <fcntl.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <limits.h>
 
 typedef enum s_tokens
 {
@@ -50,6 +51,8 @@ typedef struct s_infos
 	int					pipes;
 	int					reset;
 	t_lexer				*lexers;
+	char				*pwd;
+	char				*old_pwd;
 }		t_infos;
 
 typedef struct s_parser_infos
@@ -66,6 +69,7 @@ typedef struct s_cmds_infos
 	int					redir_nbr;
 	char				*hd_filename;
 	t_lexer				*redir;
+	int					(*builtins)(t_infos *, struct s_cmds_infos *);
 	struct s_cmds_infos	*next;
 	struct s_cmds_infos	*prev;
 }	t_cmds_infos;
@@ -79,6 +83,7 @@ typedef struct s_g_global
 }	t_g_global;
 
 extern t_g_global	g_global;
+int	(*init_builtins(char *str))(t_infos *infos, t_cmds_infos *cmds_infos);
 
 /*main.c*/
 int				init_infos(t_infos *infos);
@@ -171,5 +176,8 @@ int				handle_question(char **tmp);
 int				check_digit(int j, char *str);
 int				expand_lengh(char *str, int j);
 size_t			find_equal(char *str);
+
+/*cd_built.c*/
+int				cd_built(t_infos *infos, t_cmds_infos *cmd_infos);
 
 #endif

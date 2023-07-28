@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 01:41:27 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/25 22:24:57 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/28 01:22:35 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,24 @@ int	init_infos(t_infos *infos)
 	return (1);
 }
 
+int	init_pwd(t_infos *infos)
+{
+	int	i;
+
+	i = 0;
+	while (infos->envp[i])
+	{
+		if (!ft_strncmp(infos->envp[i], "PWD=", 4))
+			infos->pwd = ft_substr(infos->envp[i],
+					4, ft_strlen(infos->envp[i]) - 4);
+		if (!ft_strncmp(infos->envp[i], "OLDPWD=", 7))
+			infos->old_pwd = ft_substr(infos->envp[i],
+					7, ft_strlen(infos->envp[i]) - 7);
+		i++;
+	}
+	return (1);
+}
+
 int	main(int ac, char **av, char **env)
 {
 	t_infos	infos;
@@ -36,6 +54,7 @@ int	main(int ac, char **av, char **env)
 		return (0);
 	}
 	infos.envp = ft_arrdup(env);
+	init_pwd(&infos);
 	init_infos(&infos);
 	main_loop(&infos);
 	return (0);
