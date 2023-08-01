@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agaley <agaley@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 01:41:30 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/28 21:48:43 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/29 00:30:29 by agaley           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,17 +86,18 @@ typedef struct s_g_global
 extern t_g_global	g_global;
 int	(*init_builtins(char *str))(t_infos *infos, t_cmds_infos *cmds_infos);
 
-/* Error codes */
-# define ERR_NEWLINE 0
-# define ERR_MEMORY 1
-# define ERR_QUOTES 2
-# define ERR_PARSER 3
-# define ERR_PIPE 4
-# define ERR_FORK 5
-# define ERR_OUTFILE 6
-# define ERR_INFILE 7
-# define ERR_PATH 8
-# define ERR_PERM 9
+/*Error messages*/
+# define ERR_NEWLINE "syntax error near unexpected token 'newline'\n"
+# define ERR_MEMORY "memory error: unable to assign memory\n"
+# define ERR_QUOTES "syntax error: unable to locate closing quotation\n"
+# define ERR_PARSER "Parser problem\n"
+# define ERR_PIPE "Failed to create pipe\n"
+# define ERR_FORK "Failed to fork\n"
+# define ERR_OUTFILE "outfile: Error\n"
+# define ERR_INFILE "infile: No such file or directory\n"
+# define ERR_PATH "Path does not exist\n"
+# define ERR_PERM "Permission denied\n"
+# define ERR_ARGS "Too many arguments\n"
 
 /*main.c*/
 int				init_infos(t_infos *infos);
@@ -137,8 +138,8 @@ t_lexer			*ft_clearlexer_one(t_lexer **lexers);
 /*errors.c*/
 int				double_token_error(t_infos *infos, t_lexer *lexers, \
 								t_tokens token);
-void			parser_error(int error, t_infos *infos, t_lexer *lexers);
-int				ft_error(int error, t_infos *infos);
+void			parser_error(char *error, t_infos *infos, t_lexer *lexers);
+int				ft_error(char *error, t_infos *infos);
 int				check_pipe_errors(t_infos *infos, t_tokens token);
 
 /*redirs.c*/
@@ -194,7 +195,7 @@ size_t			find_equal(char *str);
 int				cd_built(t_infos *infos, t_cmds_infos *cmd_infos);
 
 /*env_built.c*/
-int 			env_built(t_infos *infos, t_cmds_infos *cmd_infos);
+int				env_built(t_infos *infos, t_cmds_infos *cmd_infos);
 int				pwd_built(t_infos *infos, t_cmds_infos *cmd_infos);
 
 /*exit_build.c*/

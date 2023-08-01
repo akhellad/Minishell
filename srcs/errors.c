@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agaley <agaley@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 09:13:07 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/28 04:19:06 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/07/29 00:29:57 by agaley           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	parser_error(int error, t_infos *infos, t_lexer *lexers)
+void	parser_error(char *error, t_infos *infos, t_lexer *lexers)
 {
 	ft_clearlexer(&lexers);
 	ft_error(error, infos);
@@ -40,29 +40,9 @@ int	double_token_error(t_infos *infos, t_lexer *lexers,
 	return (EXIT_FAILURE);
 }
 
-int	ft_error(int error, t_infos *infos)
+int	ft_error(char *message, t_infos *infos)
 {
-	if (error == ERR_NEWLINE)
-		ft_putstr_fd("syntax error near unexpected token 'newline'\n", 2);
-	else if (error == ERR_MEMORY)
-		ft_putstr_fd("memory error: unable to assign memory\n", STDERR_FILENO);
-	else if (error == ERR_QUOTES)
-		ft_putstr_fd("syntax error: unable to locate closing quotation\n",
-			STDERR_FILENO);
-	else if (error == ERR_PARSER)
-		ft_putstr_fd("Parser problem\n", STDERR_FILENO);
-	else if (error == ERR_PIPE)
-		ft_putstr_fd("Failed to create pipe\n", STDERR_FILENO);
-	else if (error == ERR_FORK)
-		ft_putstr_fd("Failed to fork\n", STDERR_FILENO);
-	else if (error == ERR_OUTFILE)
-		ft_putstr_fd("outfile: Error\n", STDERR_FILENO);
-	else if (error == ERR_INFILE)
-		ft_putstr_fd("infile: No such file or directory\n", STDERR_FILENO);
-	else if (error == ERR_PATH)
-		ft_putendl_fd("Path does not exist", STDERR_FILENO);
-	else if (error == ERR_PERM)
-		ft_putendl_fd("Permission denied", STDERR_FILENO);
+	ft_putstr_fd(message, STDERR_FILENO);
 	if (infos)
 		reset_infos(infos);
 	return (EXIT_FAILURE);
