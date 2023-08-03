@@ -6,7 +6,7 @@
 /*   By: agaley <agaley@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 01:41:27 by akhellad          #+#    #+#             */
-/*   Updated: 2023/08/01 01:43:34 by agaley           ###   ########lyon.fr   */
+/*   Updated: 2023/08/04 01:29:45 by agaley           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int	main(int ac, char **av, char **env)
 		dprintf(STDERR_FILENO, ": No such file or directory\n");
 		return (EXIT_FAILURE);
 	}
+	signal_init();
 	infos.envp = ft_arrdup(env);
 	init_pwd(&infos);
 	init_infos(&infos);

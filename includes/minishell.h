@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agaley <agaley@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 01:41:30 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/28 21:48:43 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/08/04 01:31:54 by agaley           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <readline/history.h>
 # include <limits.h>
 # include <errno.h>
+# include <signal.h>
 
 typedef enum s_tokens
 {
@@ -172,6 +173,9 @@ int				check_double_quotes(char *str, int i, int *quotes_nbr, \
 									int quotes);
 char			*del_quotes(char *str, char c);
 int				quotes(int i, char *str, char del);
+
+/*signals.c*/
+void			signal_init(void);
 
 /*spaces.c*/
 int				skip_spaces(char *str, int i);

@@ -6,7 +6,7 @@
 #    By: agaley <agaley@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/22 01:40:01 by akhellad          #+#    #+#              #
-#    Updated: 2023/08/01 01:35:34 by agaley           ###   ########lyon.fr    #
+#    Updated: 2023/08/04 01:25:16 by agaley           ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,7 @@ SRCS    = main.c \
 		  cd_built.c \
 		  env_built.c \
 		  exit_built.c \
+		  signals.c
 
 OBJS    = $(addprefix $(OBJS_DIR),$(SRCS:.c=.o))
 
