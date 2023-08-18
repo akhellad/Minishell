@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agaley <agaley@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 01:41:27 by akhellad          #+#    #+#             */
 /*   Updated: 2023/08/14 22:11:45 by akhellad         ###   ########.fr       */
@@ -51,12 +51,14 @@ int	main(int ac, char **av, char **env)
 
 	if (ac != 1 || av[1])
 	{
-		printf("Too many arguments\n");
-		return (0);
+		dprintf(STDERR_FILENO, "minish: ");
+		dprintf(STDERR_FILENO, "%s", av[1]);
+		dprintf(STDERR_FILENO, ": No such file or directory\n");
+		return (EXIT_FAILURE);
 	}
 	infos.envp = ft_arrdup(env);
 	init_pwd(&infos);
 	init_infos(&infos);
 	main_loop(&infos);
-	return (0);
+	return (EXIT_SUCCESS);
 }
