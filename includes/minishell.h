@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 01:41:30 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/28 21:48:43 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/08/14 23:49:12 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <readline/history.h>
 # include <limits.h>
 # include <errno.h>
+# include <signal.h>
 
 typedef enum s_tokens
 {
@@ -199,5 +200,11 @@ int				pwd_built(t_infos *infos, t_cmds_infos *cmd_infos);
 
 /*exit_build.c*/
 int				exit_built(t_infos *infos, t_cmds_infos *cmd_infos);
+
+/*signals.c*/
+void			signal_init(void);
+
+/*unset_built.c*/
+int				unset_built(t_infos *infos, t_cmds_infos *cmd_infos);
 
 #endif

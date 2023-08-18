@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: agaley <agaley@student.42lyon.fr>          +#+  +:+       +#+         #
+#    By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/22 01:40:01 by akhellad          #+#    #+#              #
-#    Updated: 2023/08/01 01:35:34 by agaley           ###   ########lyon.fr    #
+#    Updated: 2023/08/16 23:03:01 by akhellad         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,9 @@ SRCS    = main.c \
 		  builtins.c \
 		  cd_built.c \
 		  env_built.c \
-		  exit_built.c \
+          exit_built.c \
+          signals.c \
+          unset_built.c \
 
 OBJS    = $(addprefix $(OBJS_DIR),$(SRCS:.c=.o))
 
