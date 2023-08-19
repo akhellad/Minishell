@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 23:22:21 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/28 04:32:14 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/08/18 23:14:27 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ int	here_doc(t_infos *infos, t_lexer *hd_infos, char *filename)
 		quotes = 1;
 	else
 		quotes = 0;
-	del_quotes(hd_infos->arg, '\'');
-	del_quotes(hd_infos->arg, '\"');
+	hd_del_quotes(hd_infos->arg, '\'');
+	hd_del_quotes(hd_infos->arg, '\"');
 	g_global.stop_here_doc = 0;
 	g_global.in_here_doc = 1;
 	exit_code = display_here_doc(hd_infos, quotes, infos, filename);

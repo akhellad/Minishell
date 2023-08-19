@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agaley <agaley@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 01:41:27 by akhellad          #+#    #+#             */
-/*   Updated: 2023/08/14 22:11:45 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/08/19 04:55:59 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	init_infos(t_infos *infos)
 	infos->cmds_infos = NULL;
 	infos->reset = 0;
 	infos->here_doc = 0;
+	infos->export_var = 0;
 	g_global.stop_here_doc = 0;
 	g_global.in_cmd = 0;
 	g_global.in_here_doc = 0;
@@ -51,7 +52,6 @@ int	main(int ac, char **av, char **env)
 
 	if (ac != 1 || av[1])
 	{
-		dprintf(STDERR_FILENO, "minish: ");
 		dprintf(STDERR_FILENO, "%s", av[1]);
 		dprintf(STDERR_FILENO, ": No such file or directory\n");
 		return (EXIT_FAILURE);

@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 05:53:43 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/25 22:29:08 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/08/18 23:04:27 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,10 +88,10 @@ int	set_token(t_infos *infos)
 	{
 		j = 0;
 		i += skip_spaces(infos->args, i);
-		if (is_token(infos->args[i]))
-			j = sort_token(infos->args, i, &infos->lexers);
 		if (!is_token(infos->args[i]))
 			j = words(i, infos->args, &infos->lexers);
+		if (is_token(infos->args[i]))
+			j = sort_token(infos->args, i, &infos->lexers);
 		if (j < 0)
 			return (0);
 		i += j;

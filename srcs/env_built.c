@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 04:54:35 by akhellad          #+#    #+#             */
-/*   Updated: 2023/08/15 00:26:19 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/08/19 03:59:42 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ int env_built(t_infos *infos, t_cmds_infos *cmd_infos)
     i = 0;
     while (infos->envp[i])
     {
-        ft_putendl_fd(infos->envp[i], 1);
+        ft_putstr_fd(infos->envp[i], 1);
+        ft_putchar_fd('\n', 1);
         i++;
     }
     return (0);

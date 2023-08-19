@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 23:38:56 by akhellad          #+#    #+#             */
-/*   Updated: 2023/08/15 00:26:23 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/08/19 05:25:58 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,7 @@ char	**set_new_env(char **env, char **tmp, char *str)
 	j = 0;
 	while (env[i] != NULL)
 	{
-		if (!(ft_strncmp(env[i], str, find_equal(env[i]) - 1) == 0
-				&& str[find_equal(env[i])] == '\0'
-				&& env[i][ft_strlen(str)] == '='))
+		if (!(ft_strncmp(env[i], str, find_equal(env[i]) - 1) == 0 && env[i][ft_strlen(str)] == '='))
 		{
 			tmp[j] = ft_strdup(env[i]);
 			if (tmp[j] == NULL)

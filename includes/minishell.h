@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 01:41:30 by akhellad          #+#    #+#             */
-/*   Updated: 2023/08/14 23:49:12 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/08/19 04:53:45 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <limits.h>
 # include <errno.h>
 # include <signal.h>
+# include <stdbool.h>
 
 typedef enum s_tokens
 {
@@ -55,6 +56,7 @@ typedef struct s_infos
 	t_lexer				*lexers;
 	char				*pwd;
 	char				*old_pwd;
+	int					export_var;
 }		t_infos;
 
 typedef struct s_parser_infos
@@ -111,7 +113,7 @@ void			sort_cmd(t_cmds_infos *cmd, t_infos *infos);
 char			**ft_arrdup(char **arr);
 void			free_arr(char **split_arr);
 int				count_args(t_lexer	*lexers);
-void			ft_cmdsinfo_clear(t_cmds_infos **lst);
+char			*hd_del_quotes(char *str, char c);
 
 /*lexers.c*/
 t_tokens		is_token(int c);
@@ -141,6 +143,7 @@ int				double_token_error(t_infos *infos, t_lexer *lexers, \
 void			parser_error(int error, t_infos *infos, t_lexer *lexers);
 int				ft_error(int error, t_infos *infos);
 int				check_pipe_errors(t_infos *infos, t_tokens token);
+int				export_err(char *c);
 
 /*redirs.c*/
 void			sort_redirs(t_parser_infos *parser_infos);
@@ -171,7 +174,7 @@ int				add_lexer(char *str, t_tokens token, t_lexer **lexers);
 int				check_quotes(char *str);
 int				check_double_quotes(char *str, int i, int *quotes_nbr, \
 									int quotes);
-char			*del_quotes(char *str, char c);
+char			*del_quotes(char *str, char c, int *p);
 int				quotes(int i, char *str, char del);
 
 /*spaces.c*/
@@ -207,4 +210,9 @@ void			signal_init(void);
 /*unset_built.c*/
 int				unset_built(t_infos *infos, t_cmds_infos *cmd_infos);
 
+/*echo_built.c*/
+int				echo_built(t_infos *infos, t_cmds_infos *cmd_infos);
+
+/*export_built.c*/
+int				export_built(t_infos *infos, t_cmds_infos *cmds_infos);
 #endif

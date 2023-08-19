@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 09:13:07 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/28 04:19:06 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/08/19 02:39:16 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,17 @@ int	check_pipe_errors(t_infos *infos, t_tokens token)
 		return (1);
 	}
 	return (0);
+}
+
+int	export_err(char *c)
+{
+	ft_putstr_fd("export: ", STDERR_FILENO);
+	if (c)
+	{
+		ft_putchar_fd('\'', STDERR_FILENO);
+		ft_putstr_fd(c, STDERR_FILENO);
+		ft_putstr_fd("\': is ", STDERR_FILENO);
+	}
+	ft_putendl_fd("not a valid identifier", STDERR_FILENO);
+	return (EXIT_FAILURE);
 }

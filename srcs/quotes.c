@@ -6,18 +6,18 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 05:59:08 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/25 22:21:34 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/08/18 23:12:48 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-char	*del_quotes(char *str, char c)
+char	*del_quotes(char *str, char c, int *p)
 {
 	int	i;
 	int	j;
 
-	i = 0;
+	i = *p;
 	j = 0;
 	while (str[i])
 	{
@@ -30,6 +30,7 @@ char	*del_quotes(char *str, char c)
 		}
 		i++;
 	}
+	*p = i;
 	return (str);
 }
 
@@ -75,9 +76,9 @@ int	quotes(int i, char *str, char del)
 	j = 0;
 	if (str[i + j] == del)
 	{
+		j++;
 		while (str[i + j] != del && str[i + j])
 			j ++;
-		j ++; 
 	}
 	return (j);
 }

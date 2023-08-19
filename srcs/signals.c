@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 21:41:42 by akhellad          #+#    #+#             */
-/*   Updated: 2023/08/14 22:15:47 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/08/18 02:27:38 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	signal_handler(int signum)
 
 void	signal_init(void)
 {
-    rl_event_hook = event_hook; 
+    rl_event_hook = event_hook;
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, signal_handler);
 }

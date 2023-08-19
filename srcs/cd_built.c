@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 23:48:52 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/28 04:29:07 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/08/19 05:38:47 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void    update_path(t_infos *infos)
 	char	*tmp;
 	
 	tmp = malloc(sizeof(char) * PATH_MAX);
+	if (!tmp)
+		return ;
 	free(infos->old_pwd);
 	infos->old_pwd = ft_strdup(infos->pwd);
 	if (getcwd(tmp, PATH_MAX))
@@ -24,7 +26,7 @@ void    update_path(t_infos *infos)
 		free(infos->pwd);
 		infos->pwd = ft_strdup(tmp);
 	}
-	
+	free(tmp);
 }
 
 char    *find_equal_path(char *str, t_infos *infos)
