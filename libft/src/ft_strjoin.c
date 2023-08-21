@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 13:42:46 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/28 01:02:41 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/08/21 13:49:31 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,3 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	s1_2[i] = '\0';
 	return (s1_2);
 }
-

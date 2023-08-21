@@ -6,16 +6,16 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 23:48:52 by akhellad          #+#    #+#             */
-/*   Updated: 2023/08/19 05:38:47 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/08/21 13:55:18 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void    update_path(t_infos *infos)
+void	update_path(t_infos *infos)
 {
 	char	*tmp;
-	
+
 	tmp = malloc(sizeof(char) * PATH_MAX);
 	if (!tmp)
 		return ;
@@ -29,27 +29,27 @@ void    update_path(t_infos *infos)
 	free(tmp);
 }
 
-char    *find_equal_path(char *str, t_infos *infos)
+char	*find_equal_path(char *str, t_infos *infos)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (infos->envp[i])
-    {
-        if (!ft_strncmp(infos->envp[i], str, ft_strlen(str)))
+	i = 0;
+	while (infos->envp[i])
+	{
+		if (!ft_strncmp(infos->envp[i], str, ft_strlen(str)))
 			return (ft_substr(infos->envp[i], ft_strlen(str),
 					ft_strlen(infos->envp[i]) - ft_strlen(str)));
-        i++;
-    }
+		i++;
+	}
 	return (NULL);
 }
 
-int preset_path(t_infos *infos, char *str)
+int	preset_path(t_infos *infos, char *str)
 {
-    char    *tmp;
-    int     i;
+	char	*tmp;
+	int		i;
 
-    tmp = find_equal_path(str, infos);
+	tmp = find_equal_path(str, infos);
 	i = chdir(tmp);
 	free(tmp);
 	if (i != 0)
@@ -62,7 +62,7 @@ int preset_path(t_infos *infos, char *str)
 	return (i);
 }
 
-void    update_env(t_infos *infos)
+void	update_env(t_infos *infos)
 {
 	int		i;
 	char	*tmp;
@@ -86,26 +86,27 @@ void    update_env(t_infos *infos)
 	}
 }
 
-int cd_built(t_infos *infos, t_cmds_infos *cmd_infos)
+int	cd_built(t_infos *infos, t_cmds_infos *cmd_infos)
 {
-    int i;
+	int	i;
 
-    if (!cmd_infos->str[1])
-        i = preset_path(infos, "HOME=");
-    else if (!ft_strncmp(cmd_infos->str[1], "-", 1) || !ft_strncmp(cmd_infos->str[1], "..", 2))
+	if (!cmd_infos->str[1])
+		i = preset_path(infos, "HOME=");
+	else if (!ft_strncmp(cmd_infos->str[1], "-", 1) \
+			|| !ft_strncmp(cmd_infos->str[1], "..", 2))
 		i = preset_path(infos, "OLDPWD=");
-    else
-    {
-        i = chdir(cmd_infos->str[1]);
-        if (i != 0)
-        {
+	else
+	{
+		i = chdir(cmd_infos->str[1]);
+		if (i != 0)
+		{
 			ft_putstr_fd(cmd_infos->str[1], 2);
-			perror(" ");            
-        }
-    }
+			perror(" ");
+		}
+	}
 	if (i != 0)
 		return (1);
-    update_path(infos);
-    update_env(infos);
+	update_path(infos);
+	update_env(infos);
 	return (0);
 }

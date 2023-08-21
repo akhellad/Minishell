@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 23:10:38 by akhellad          #+#    #+#             */
-/*   Updated: 2023/08/16 23:25:56 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/08/21 13:56:51 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,17 @@ void	printer(int i, char **str, int fd)
 	}
 }
 
-int echo_built(t_infos *infos, t_cmds_infos *cmd_infos)
+int	echo_built(t_infos *infos, t_cmds_infos *cmd_infos)
 {
-    int		i;
+	int		i;
 	int		j;
 	bool	n_param;
 
 	i = 1;
 	n_param = false;
 	(void) infos;
-	while (cmd_infos->str[i] && cmd_infos->str[i][0] == '-' && cmd_infos->str[i][1] == 'n')
+	while (cmd_infos->str[i] && cmd_infos->str[i][0] == '-' \
+			&& cmd_infos->str[i][1] == 'n')
 	{
 		j = 1;
 		while (cmd_infos->str[i][j] == 'n')
@@ -39,7 +40,7 @@ int echo_built(t_infos *infos, t_cmds_infos *cmd_infos)
 		if (cmd_infos->str[i][j] == '\0')
 			n_param = true;
 		else
-			break;
+			break ;
 		i++;
 	}
 	printer(i, cmd_infos->str, STDOUT_FILENO);

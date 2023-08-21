@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 23:38:56 by akhellad          #+#    #+#             */
-/*   Updated: 2023/08/19 05:25:58 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/08/21 14:10:06 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ char	**set_new_env(char **env, char **tmp, char *str)
 	j = 0;
 	while (env[i] != NULL)
 	{
-		if (!(ft_strncmp(env[i], str, find_equal(env[i]) - 1) == 0 && env[i][ft_strlen(str)] == '='))
+		if (!(ft_strncmp(env[i], str, find_equal(env[i]) - 1) == 0 \
+			&& env[i][ft_strlen(str)] == '='))
 		{
 			tmp[j] = ft_strdup(env[i]);
 			if (tmp[j] == NULL)
@@ -42,7 +43,7 @@ char	**unset_var(char **env, char *var)
 	size_t	i;
 
 	i = 0;
-	while(env[i] != NULL)
+	while (env[i] != NULL)
 		i++;
 	tmp = ft_calloc(sizeof(char *), i + 1);
 	if (!tmp)
@@ -58,7 +59,7 @@ int	check_unset_error(t_cmds_infos *cmd_infos)
 		ft_putendl_fd("unset: not enough arguments", STDERR_FILENO);
 		return (EXIT_FAILURE);
 	}
-	if(find_equal(cmd_infos->str[1]))
+	if (find_equal(cmd_infos->str[1]))
 	{
 		ft_putendl_fd("unset: invalid parameter name", STDERR_FILENO);
 		return (EXIT_FAILURE);
@@ -70,7 +71,7 @@ int	unset_built(t_infos *infos, t_cmds_infos *cmd_infos)
 {
 	char	**tmp;
 
-	if(check_unset_error(cmd_infos))
+	if (check_unset_error(cmd_infos))
 		return (EXIT_FAILURE);
 	else
 	{

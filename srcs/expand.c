@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 05:00:41 by akhellad          #+#    #+#             */
-/*   Updated: 2023/08/21 13:34:25 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/08/21 14:04:53 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,9 @@ char	**expand(t_infos *infos, char **str)
 	int		p;
 	int		k;
 
-	i = 0;
+	i = -1;
 	tmp = NULL;
-	while (str[i] != NULL)
+	while (str[++i] != NULL)
 	{
 		p = 0;
 		k = 0;
@@ -109,7 +109,6 @@ char	**expand(t_infos *infos, char **str)
 			str[i] = del_quotes(str[i], '\'', &p);
 			str[i] = del_quotes(str[i], '\"', &k);
 		}
-		i++;
 	}
 	return (str);
 }

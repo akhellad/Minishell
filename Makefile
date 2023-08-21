@@ -6,7 +6,7 @@
 #    By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/22 01:40:01 by akhellad          #+#    #+#              #
-#    Updated: 2023/08/19 04:49:15 by akhellad         ###   ########.fr        #
+#    Updated: 2023/08/21 14:05:40 by akhellad         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,7 @@ SRCS    = main.c \
           unset_built.c \
           echo_built.c \
 		  export_built.c \
+		  export_utils.c
 
 OBJS    = $(addprefix $(OBJS_DIR),$(SRCS:.c=.o))
 

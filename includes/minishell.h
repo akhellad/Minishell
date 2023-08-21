@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 01:41:30 by akhellad          #+#    #+#             */
-/*   Updated: 2023/08/21 13:46:28 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/08/21 14:06:36 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,7 +198,7 @@ size_t			find_equal(char *str);
 int				cd_built(t_infos *infos, t_cmds_infos *cmd_infos);
 
 /*env_built.c*/
-int 			env_built(t_infos *infos, t_cmds_infos *cmd_infos);
+int				env_built(t_infos *infos, t_cmds_infos *cmd_infos);
 int				pwd_built(t_infos *infos, t_cmds_infos *cmd_infos);
 
 /*exit_build.c*/
@@ -215,4 +215,9 @@ int				echo_built(t_infos *infos, t_cmds_infos *cmd_infos);
 
 /*export_built.c*/
 int				export_built(t_infos *infos, t_cmds_infos *cmds_infos);
+
+/*export_utils.c*/
+void			solo_export(t_infos *infos);
+int				check_valid_identifier(char c);
+
 #endif
