@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 18:19:13 by akhellad          #+#    #+#             */
-/*   Updated: 2023/08/19 05:25:42 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/08/21 13:30:29 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	check_execute(t_infos *infos)
 int	main_loop(t_infos *infos)
 {
 	char	*tmp;
-
+	
 	infos->args = readline("\033[1;35mminishell\033[34m> \033[0m");
 	tmp = ft_strtrim(infos->args, " ");
 	free(infos->args);

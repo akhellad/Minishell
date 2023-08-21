@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 05:00:41 by akhellad          #+#    #+#             */
-/*   Updated: 2023/08/19 05:39:56 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/08/21 13:34:25 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,12 +89,14 @@ char	**expand(t_infos *infos, char **str)
 	int		i;
 	char	*tmp;
 	int		p;
+	int		k;
 
 	i = 0;
 	tmp = NULL;
 	while (str[i] != NULL)
 	{
 		p = 0;
+		k = 0;
 		if (str[i][find_dollar(str[i]) - 2] != '\'' && find_dollar(str[i]) != 0
 			&& str[i][find_dollar(str[i])] != '\0')
 		{
@@ -104,8 +106,8 @@ char	**expand(t_infos *infos, char **str)
 		}
 		if (ft_strncmp(str[0], "export", ft_strlen(str[0]) - 1) != 0)
 		{
-			str[i] = del_quotes(str[i], '\"', &p);
 			str[i] = del_quotes(str[i], '\'', &p);
+			str[i] = del_quotes(str[i], '\"', &k);
 		}
 		i++;
 	}
