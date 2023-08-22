@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 08:19:58 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/25 22:24:12 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/08/22 07:47:12 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,13 @@ int	parser(t_infos *infos)
 
 	infos->cmds_infos = NULL;
 	pipes_nbr(infos->lexers, infos);
-	if (infos->lexers->token == PIPE)
+	if (infos->lexers && infos->lexers->token == PIPE)
 		return (double_token_error(infos, infos->lexers, infos->lexers->token));
 	while (infos->lexers)
 	{
 		if (infos->lexers && infos->lexers->token == PIPE)
 			ft_dellexer_one(&infos->lexers, infos->lexers->index);
-		if (check_pipe_errors(infos, infos->lexers->token))
+		if (!infos->lexers || check_pipe_errors(infos, infos->lexers->token))
 			return (1);
 		parser_infos = init_parser_infos(infos->lexers, infos);
 		node = init_cmd(&parser_infos);

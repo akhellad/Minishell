@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 05:53:43 by akhellad          #+#    #+#             */
-/*   Updated: 2023/08/18 23:04:27 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/08/22 07:49:36 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,52 @@ int	sort_token(char *str, int i, t_lexer **lexers)
 	return (0);
 }
 
+char	*handle_incomplete_command(char *input)
+{
+	char	*new_input;
+	char	*tmp;
+
+	if (!input)
+		return (NULL); // Gestion de l'erreur de concaténation
+	if (input[strlen(input) - 1] == '|')
+	{
+		new_input = readline("\033[34m> \033[0m");
+		if (!new_input)
+			return (NULL); 
+
+		tmp = ft_strjoin(input, new_input);
+		free(input);
+		free(new_input);
+		input = tmp;
+	}
+	return (input);
+}
+
+
+int	handle_partial_command(t_infos *infos)
+{
+	char	*full_cmd;
+
+	full_cmd = handle_incomplete_command(infos->args);
+	if (!full_cmd)
+	{
+		free(infos->args);
+		infos->args = NULL;
+		return (1);
+	}
+
+	infos->args = full_cmd;
+	return (0);
+}
+
 int	set_token(t_infos *infos)
 {
 	int	i;
 	int	j;
 
 	i = 0;
+	if (handle_partial_command(infos))
+		return (1);
 	while (infos->args[i])
 	{
 		j = 0;

@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 09:13:07 by akhellad          #+#    #+#             */
-/*   Updated: 2023/08/21 13:58:13 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/08/22 07:09:35 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,15 +70,15 @@ int	ft_error(int error, t_infos *infos)
 
 int	check_pipe_errors(t_infos *infos, t_tokens token)
 {
+	if (!infos->lexers)
+	{
+		parser_error(0, infos, infos->lexers);
+		return (1);
+	}
 	if (token == PIPE)
 	{
 		double_token_error(infos, infos->lexers,
 			infos->lexers->token);
-		return (1);
-	}
-	if (!infos->lexers)
-	{
-		parser_error(0, infos, infos->lexers);
 		return (1);
 	}
 	return (0);
