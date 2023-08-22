@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 21:34:55 by akhellad          #+#    #+#             */
-/*   Updated: 2023/08/21 14:00:47 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/08/22 09:30:05 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int	is_str_digit(char *str)
 	i = 0;
 	while (str[i])
 	{
+		if (str[i] == '-')
+			i++;
 		if (!ft_isdigit(str[i]))
 			return (0);
 		i++;
@@ -45,7 +47,7 @@ void	find_exit_code(char **str)
 	if (!str[1])
 		exit_code = 0;
 	else if (is_str_digit(str[1]))
-		exit_code = ft_atoi(str[1]);
+		exit_code = ft_atoi(str[1]) % 256;
 	else
 	{
 		ft_putstr_fd(str[1], STDERR_FILENO);

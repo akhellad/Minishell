@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 23:48:52 by akhellad          #+#    #+#             */
-/*   Updated: 2023/08/21 13:55:18 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/08/22 09:43:19 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,6 @@ int	cd_built(t_infos *infos, t_cmds_infos *cmd_infos)
 
 	if (!cmd_infos->str[1])
 		i = preset_path(infos, "HOME=");
-	else if (!ft_strncmp(cmd_infos->str[1], "-", 1) \
-			|| !ft_strncmp(cmd_infos->str[1], "..", 2))
-		i = preset_path(infos, "OLDPWD=");
 	else
 	{
 		i = chdir(cmd_infos->str[1]);
