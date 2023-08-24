@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 22:10:45 by akhellad          #+#    #+#             */
-/*   Updated: 2023/08/21 14:06:45 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/08/24 20:05:15 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,9 @@ int	check_parameter(char *str)
 	i = 0;
 	if (ft_isdigit(str[0]))
 		return (export_err(str));
-	if (find_equal(str) == 0)
-		return (EXIT_FAILURE);
 	if (str[0] == '=')
 		return (export_err(str));
-	while (str[i] != '=')
+	while (str[i] && str[i] != '=')
 	{
 		if (check_valid_identifier(str[i]))
 			return (export_err(str));

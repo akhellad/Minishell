@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 05:00:41 by akhellad          #+#    #+#             */
-/*   Updated: 2023/08/21 14:04:53 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/08/24 20:46:22 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,26 +88,23 @@ char	**expand(t_infos *infos, char **str)
 {
 	int		i;
 	char	*tmp;
-	int		p;
-	int		k;
 
 	i = -1;
 	tmp = NULL;
 	while (str[++i] != NULL)
 	{
-		p = 0;
-		k = 0;
-		if (str[i][find_dollar(str[i]) - 2] != '\'' && find_dollar(str[i]) != 0
+		if (find_dollar(str[i]) != 0 && str[i][find_dollar(str[i]) - 2] != '\''
 			&& str[i][find_dollar(str[i])] != '\0')
 		{
 			tmp = handle_dollar(infos, str[i]);
 			free (str[i]);
-			str[i] = tmp;
+			str[i] = ft_strdup(tmp);
+			free(tmp);
 		}
 		if (ft_strncmp(str[0], "export", ft_strlen(str[0]) - 1) != 0)
 		{
-			str[i] = del_quotes(str[i], '\'', &p);
-			str[i] = del_quotes(str[i], '\"', &k);
+			str[i] = hd_del_quotes(str[i], '\"');
+			str[i] = hd_del_quotes(str[i], '\'');
 		}
 	}
 	return (str);
@@ -118,7 +115,7 @@ char	*expand_str(t_infos *infos, char *str)
 	char	*tmp;
 
 	tmp = NULL;
-	if (str[find_dollar(str) - 2] != '\'' && find_dollar(str) != 0
+	if (find_dollar(str) != 0 && str[find_dollar(str) - 2] != '\''
 		&& str[find_dollar(str)] != '\0')
 	{
 		tmp = handle_dollar(infos, str);

@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 21:34:34 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/25 22:37:55 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/08/24 19:05:12 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,9 @@ int	check_digit(int j, char *str)
 	if (str[j] == '$')
 	{
 		if (ft_isdigit(str[j + 1]) == 1)
+		{
 			j += 2;
+		}
 	}
 	return (j - i);
 }

@@ -2,3 +2,5 @@ minishell
 *.o
 libft.a
 outfile
+valgrind_ignore_leaks.txt
+.vscode

@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 05:53:43 by akhellad          #+#    #+#             */
-/*   Updated: 2023/08/22 07:49:36 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/08/24 18:51:01 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ char	*handle_incomplete_command(char *input)
 	char	*tmp;
 
 	if (!input)
-		return (NULL); // Gestion de l'erreur de concaténation
+		return (NULL);
 	if (input[strlen(input) - 1] == '|')
 	{
 		new_input = readline("\033[34m> \033[0m");

@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 01:41:27 by akhellad          #+#    #+#             */
-/*   Updated: 2023/08/21 13:30:42 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/08/24 19:44:19 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,7 @@ int	main(int ac, char **av, char **env)
 	init_pwd(&infos);
 	init_infos(&infos);
 	main_loop(&infos);
+	free_arr(infos.envp);
+	clear_history();
 	return (EXIT_SUCCESS);
 }

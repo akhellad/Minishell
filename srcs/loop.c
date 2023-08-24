@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 18:19:13 by akhellad          #+#    #+#             */
-/*   Updated: 2023/08/21 14:08:07 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/08/24 19:56:51 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,29 @@ int	check_execute(t_infos *infos)
 	return (0);
 }
 
+void free_resources(t_infos *infos) 
+{
+	int i;
+
+	i = 0;
+    if (infos->envp) {
+        while (infos->envp[i]) 
+		{
+            free(infos->envp[i]);
+			i++;
+        }
+        free(infos->envp);
+    }
+	free(infos->args);
+	if (infos->pid)
+		free(infos->pid);
+	free_arr(infos->paths);
+	free(infos->pwd);
+	free(infos->old_pwd);
+    ft_cmdsinfo_clear(&infos->cmds_infos);
+    ft_clearlexer(&infos->lexers);
+}
+
 int	main_loop(t_infos *infos)
 {
 	char	*tmp;
@@ -71,6 +94,7 @@ int	main_loop(t_infos *infos)
 	if (!infos->args)
 	{
 		ft_putendl_fd("exit", 1);
+		free_resources(infos);
 		exit(0);
 	}
 	if (infos->args[0] == '\0')

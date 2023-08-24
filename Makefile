@@ -6,7 +6,7 @@
 #    By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/22 01:40:01 by akhellad          #+#    #+#              #
-#    Updated: 2023/08/21 14:05:40 by akhellad         ###   ########.fr        #
+#    Updated: 2023/08/24 19:47:17 by akhellad         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -93,5 +93,23 @@ fclean:    	clean
 			@rm -rf $(OBJS_DIR)
 
 re:         fclean all
+
+leaks			:    all
+				echo "{" > valgrind_ignore_leaks.txt
+				echo "leak readline" >> valgrind_ignore_leaks.txt
+				echo "    Memcheck:Leak" >> valgrind_ignore_leaks.txt
+				echo "    ..." >> valgrind_ignore_leaks.txt
+				echo "    fun:readline" >> valgrind_ignore_leaks.txt
+				echo "}" >> valgrind_ignore_leaks.txt
+				echo "{" >> valgrind_ignore_leaks.txt
+				echo "    leak add_history" >> valgrind_ignore_leaks.txt
+				echo "    Memcheck:Leak" >> valgrind_ignore_leaks.txt
+				echo "    ..." >> valgrind_ignore_leaks.txt
+				echo "    fun:add_history" >> valgrind_ignore_leaks.txt
+				echo "}" >> valgrind_ignore_leaks.txt
+				valgrind --suppressions=valgrind_ignore_leaks.txt --leak-check=full \
+				    --show-leak-kinds=all --track-fds=yes \
+				    --show-mismatched-frees=yes --read-var-info=yes \
+				    -s ./${NAME}
 
 .PHONY: all clean fclean re force
