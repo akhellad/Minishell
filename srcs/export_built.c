@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 22:10:45 by akhellad          #+#    #+#             */
-/*   Updated: 2023/08/24 20:05:15 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/08/27 14:37:59 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,8 @@ int	variable_exist(t_infos *infos, char *str)
 	int	i;
 
 	i = 0;
-	if (str[find_equal(str)] == '\"')
-		hd_del_quotes(str, '\"');
-	if (str[find_equal(str)] == '\'')
-		hd_del_quotes(str, '\'');
+	if (str[find_equal(str)] == '\"' || str[find_equal(str)] == '\'')
+		str = handle_quotes(str);
 	while (infos->envp[i])
 	{
 		if (ft_strncmp(infos->envp[i],
@@ -83,10 +81,8 @@ char	**add_var(char **arr, char *str)
 	size_t	i;
 
 	i = 0;
-	if (str[find_equal(str)] == '\"')
-		hd_del_quotes(str, '\"');
-	if (str[find_equal(str)] == '\'')
-		hd_del_quotes(str, '\'');
+	if (str[find_equal(str)] == '\"' || str[find_equal(str)] == '\'')
+		str = handle_quotes(str);
 	while (arr[i] != NULL)
 		i++;
 	rtn = ft_calloc(sizeof(char *), i + 2);

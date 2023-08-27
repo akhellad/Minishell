@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 05:00:41 by akhellad          #+#    #+#             */
-/*   Updated: 2023/08/24 20:46:22 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/08/27 14:28:56 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,7 @@ char	**expand(t_infos *infos, char **str)
 		}
 		if (ft_strncmp(str[0], "export", ft_strlen(str[0]) - 1) != 0)
 		{
-			str[i] = hd_del_quotes(str[i], '\"');
-			str[i] = hd_del_quotes(str[i], '\'');
+			str[i] = handle_quotes(str[i]);
 		}
 	}
 	return (str);

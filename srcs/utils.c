@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 06:53:48 by akhellad          #+#    #+#             */
-/*   Updated: 2023/08/24 21:06:19 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/08/27 14:45:18 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,25 +64,4 @@ char	**ft_arrdup(char **arr)
 		i++;
 	}
 	return (tmp);
-}
-
-char	*hd_del_quotes(char *str, char c)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (str[i])
-	{
-		if (str[i] == c)
-		{
-			j = 0;
-			while (str[i + j] == c)
-				j++;
-			ft_strlcpy(&str[i], &str[i + j], strlen(str) - i);
-		}
-		i++;
-	}
-	return (str);
 }

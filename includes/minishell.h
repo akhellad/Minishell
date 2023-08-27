@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 01:41:30 by akhellad          #+#    #+#             */
-/*   Updated: 2023/08/24 21:12:48 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/08/27 14:45:06 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,11 +113,9 @@ void			sort_cmd(t_cmds_infos *cmd, t_infos *infos);
 char			**ft_arrdup(char **arr);
 void			free_arr(char **split_arr);
 int				count_args(t_lexer	*lexers);
-char			*hd_del_quotes(char *str, char c);
 
 /*lexers.c*/
 t_tokens		is_token(int c);
-int				quotes(int i, char *str, char del);
 int				set_token(t_infos *infos);
 
 /*envp.c*/
@@ -176,6 +174,7 @@ int				check_double_quotes(char *str, int i, int *quotes_nbr, \
 									int quotes);
 char			*del_quotes(char *str, char c, int *p);
 int				quotes(int i, char *str, char del);
+char			*handle_quotes(char *str);
 
 /*spaces.c*/
 int				skip_spaces(char *str, int i);

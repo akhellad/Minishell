@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 23:22:21 by akhellad          #+#    #+#             */
-/*   Updated: 2023/08/18 23:14:27 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/08/27 14:38:23 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ int	check_fd_heredoc(t_infos *infos, int end[2], t_cmds_infos *cmd)
 	if (infos->here_doc)
 	{
 		close(end[0]);
-		in_fd = open(cmd->hd_filename, O_RDONLY);
+		if (cmd->hd_filename)
+			in_fd = open(cmd->hd_filename, O_RDONLY);
 	}
 	else
 		in_fd = end[0];
@@ -64,8 +65,7 @@ int	here_doc(t_infos *infos, t_lexer *hd_infos, char *filename)
 		quotes = 1;
 	else
 		quotes = 0;
-	hd_del_quotes(hd_infos->arg, '\'');
-	hd_del_quotes(hd_infos->arg, '\"');
+	hd_infos->arg = handle_quotes(hd_infos->arg);
 	g_global.stop_here_doc = 0;
 	g_global.in_here_doc = 1;
 	exit_code = display_here_doc(hd_infos, quotes, infos, filename);

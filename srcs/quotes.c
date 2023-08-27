@@ -6,33 +6,11 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 05:59:08 by akhellad          #+#    #+#             */
-/*   Updated: 2023/08/18 23:12:48 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/08/27 14:45:29 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-char	*del_quotes(char *str, char c, int *p)
-{
-	int	i;
-	int	j;
-
-	i = *p;
-	j = 0;
-	while (str[i])
-	{
-		if (str[i] == c)
-		{
-			j = 0;
-			while (str[i + j] == c)
-				j++;
-			ft_strlcpy(&str[i], &str[i + j], strlen(str) - i);
-		}
-		i++;
-	}
-	*p = i;
-	return (str);
-}
 
 int	check_double_quotes(char *str, int i, int *quotes_nbr, int quotes)
 {
@@ -81,4 +59,34 @@ int	quotes(int i, char *str, char del)
 			j ++;
 	}
 	return (j);
+}
+
+char *handle_quotes(char *arg)
+{
+    char *final_arg;
+    int output_index;
+    int i;
+	char quote_type;
+
+	i = 0;
+	output_index = 0;
+	final_arg = ft_strdup(arg);
+    while (arg[i] != '\0') 
+	{
+        while (arg[i] != '\'' && arg[i] != '"' && arg[i] != '\0')
+            final_arg[output_index++] = arg[i++];
+        if (arg[i] == '\'' || arg[i] == '"') 
+		{
+            quote_type = arg[i];
+            i++;
+            while (arg[i] != quote_type && arg[i] != '\0')
+                final_arg[output_index++] = arg[i++];
+            if (arg[i] == quote_type)
+                i++;
+        }
+    }
+    final_arg[output_index] = '\0';
+	if (arg)
+		free(arg);
+    return final_arg;
 }
