@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 18:19:13 by akhellad          #+#    #+#             */
-/*   Updated: 2023/08/24 19:56:51 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/08/27 15:03:01 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,27 +60,28 @@ int	check_execute(t_infos *infos)
 	return (0);
 }
 
-void free_resources(t_infos *infos) 
+void	free_resources(t_infos *infos)
 {
-	int i;
+	int	i;
 
 	i = 0;
-    if (infos->envp) {
-        while (infos->envp[i]) 
+	if (infos->envp)
+	{
+		while (infos->envp[i]) 
 		{
-            free(infos->envp[i]);
+			free(infos->envp[i]);
 			i++;
-        }
-        free(infos->envp);
-    }
+		}
+		free(infos->envp);
+	}
 	free(infos->args);
 	if (infos->pid)
 		free(infos->pid);
 	free_arr(infos->paths);
 	free(infos->pwd);
 	free(infos->old_pwd);
-    ft_cmdsinfo_clear(&infos->cmds_infos);
-    ft_clearlexer(&infos->lexers);
+	ft_cmdsinfo_clear(&infos->cmds_infos);
+	ft_clearlexer(&infos->lexers);
 }
 
 int	main_loop(t_infos *infos)

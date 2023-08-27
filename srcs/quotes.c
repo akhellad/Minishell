@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 05:59:08 by akhellad          #+#    #+#             */
-/*   Updated: 2023/08/27 14:45:29 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/08/27 15:07:45 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,32 +61,31 @@ int	quotes(int i, char *str, char del)
 	return (j);
 }
 
-char *handle_quotes(char *arg)
+char	*handle_quotes(char *arg)
 {
-    char *final_arg;
-    int output_index;
-    int i;
-	char quote_type;
+	char	*final_arg;
+	int		output_index;
+	int		i;
+	char	quote_type;
 
 	i = 0;
 	output_index = 0;
 	final_arg = ft_strdup(arg);
-    while (arg[i] != '\0') 
+	while (arg[i] != '\0') 
 	{
-        while (arg[i] != '\'' && arg[i] != '"' && arg[i] != '\0')
-            final_arg[output_index++] = arg[i++];
-        if (arg[i] == '\'' || arg[i] == '"') 
+		while (arg[i] != '\'' && arg[i] != '"' && arg[i] != '\0')
+			final_arg[output_index++] = arg[i++];
+		if (arg[i] == '\'' || arg[i] == '"') 
 		{
-            quote_type = arg[i];
-            i++;
-            while (arg[i] != quote_type && arg[i] != '\0')
-                final_arg[output_index++] = arg[i++];
-            if (arg[i] == quote_type)
-                i++;
-        }
-    }
-    final_arg[output_index] = '\0';
-	if (arg)
-		free(arg);
-    return final_arg;
+			quote_type = arg[i];
+			i++;
+			while (arg[i] != quote_type && arg[i] != '\0')
+				final_arg[output_index++] = arg[i++];
+			if (arg[i] == quote_type)
+				i++;
+		}
+	}
+	final_arg[output_index] = '\0';
+	free(arg);
+	return (final_arg);
 }

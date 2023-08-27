@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 05:56:46 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/25 22:30:59 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/08/27 15:05:47 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,39 @@ int	add_lexer(char *str, t_tokens token, t_lexer **lexers)
 		return (0);
 	ft_addlexer_back(lexers, lexer);
 	return (1);
+}
+
+char	*handle_incomplete_command(char *input)
+{
+	char	*new_input;
+	char	*tmp;
+
+	if (!input)
+		return (NULL);
+	if (input[strlen(input) - 1] == '|')
+	{
+		new_input = readline("\033[34m> \033[0m");
+		if (!new_input)
+			return (NULL); 
+		tmp = ft_strjoin(input, new_input);
+		free(input);
+		free(new_input);
+		input = tmp;
+	}
+	return (input);
+}
+
+int	handle_partial_command(t_infos *infos)
+{
+	char	*full_cmd;
+
+	full_cmd = handle_incomplete_command(infos->args);
+	if (!full_cmd)
+	{
+		free(infos->args);
+		infos->args = NULL;
+		return (1);
+	}
+	infos->args = full_cmd;
+	return (0);
 }

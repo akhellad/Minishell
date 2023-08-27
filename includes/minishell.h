@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 01:41:30 by akhellad          #+#    #+#             */
-/*   Updated: 2023/08/27 14:45:06 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/08/27 15:05:20 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,6 +167,7 @@ char			**resplit_str(char **double_arr);
 t_lexer			*ft_newlexer(char *str, int token);
 void			ft_addlexer_back(t_lexer **lexers, t_lexer *new);
 int				add_lexer(char *str, t_tokens token, t_lexer **lexers);
+int				handle_partial_command(t_infos *infos);
 
 /*quotes.c*/
 int				check_quotes(char *str);
