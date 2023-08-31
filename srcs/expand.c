@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 05:00:41 by akhellad          #+#    #+#             */
-/*   Updated: 2023/08/27 14:28:56 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/08/31 02:01:48 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ char	*handle_dollar(t_infos *infos, char *str)
 	{
 		j += check_digit(j, str);
 		if (str[j] == '$' && str[j + 1] == '?')
-			j += handle_question(&tmp);
+			j += handle_question(&tmp, infos);
 		else if (str[j] == '$' && (str[j + 1] != ' ' && (str[j + 1] != '"' \
 				|| str[j + 2] != '\0')) && str[j + 1] != '\0')
 			j += dollar_loop(infos, str, &tmp, j);

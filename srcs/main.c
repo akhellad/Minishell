@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 01:41:27 by akhellad          #+#    #+#             */
-/*   Updated: 2023/08/24 19:44:19 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/08/31 02:38:59 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ int	init_infos(t_infos *infos)
 	infos->reset = 0;
 	infos->here_doc = 0;
 	infos->export_var = 0;
-	g_global.stop_here_doc = 0;
-	g_global.in_cmd = 0;
-	g_global.in_here_doc = 0;
+	infos->stop_here_doc = 0;
+	infos->in_cmd = 0;
+	infos->in_here_doc = 0;
 	set_path(infos);
 	signal_init();
 	return (1);

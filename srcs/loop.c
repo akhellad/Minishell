@@ -6,13 +6,11 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 18:19:13 by akhellad          #+#    #+#             */
-/*   Updated: 2023/08/27 15:03:01 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/08/31 02:52:29 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-t_g_global	g_global;
 
 t_cmds_infos	*call_expand(t_infos *infos, t_cmds_infos *cmd)
 {
@@ -46,7 +44,7 @@ int	reset_infos(t_infos *infos)
 
 int	check_execute(t_infos *infos)
 {
-	g_global.in_cmd = 1;
+	g_signal_error = 2;
 	if (infos->pipes == 0)
 		one_cmd(infos->cmds_infos, infos);
 	else
@@ -56,7 +54,7 @@ int	check_execute(t_infos *infos)
 			return (ft_error(ERR_MEMORY, infos));
 		large_execute(infos);
 	}
-	g_global.in_cmd = 0;
+	g_signal_error = 1;
 	return (0);
 }
 

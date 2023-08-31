@@ -6,11 +6,13 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 23:22:21 by akhellad          #+#    #+#             */
-/*   Updated: 2023/08/27 14:38:23 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/08/31 02:52:47 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+int	g_signal_error;
 
 int	display_here_doc(t_lexer *hd_infos, int quotes, t_infos *infos, \
 					char *filename)
@@ -21,7 +23,7 @@ int	display_here_doc(t_lexer *hd_infos, int quotes, t_infos *infos, \
 	fd = open(filename, O_CREAT | O_RDWR | O_TRUNC, 0664);
 	arg = readline("\033[1;34m> \033[0m");
 	while (arg && ft_strncmp(hd_infos->arg, arg, ft_strlen(hd_infos->arg)) \
-			&& !g_global.stop_here_doc)
+			&& g_signal_error != 3)
 	{
 		if (quotes == 0)
 			arg = expand_str(infos, arg);
@@ -31,7 +33,7 @@ int	display_here_doc(t_lexer *hd_infos, int quotes, t_infos *infos, \
 		arg = readline("\033[1;34m> \033[0m");
 	}
 	free(arg);
-	if (g_global.stop_here_doc || !arg)
+	if (infos->stop_here_doc || !arg)
 		return (1);
 	close(fd);
 	return (0);
@@ -66,10 +68,11 @@ int	here_doc(t_infos *infos, t_lexer *hd_infos, char *filename)
 	else
 		quotes = 0;
 	hd_infos->arg = handle_quotes(hd_infos->arg);
-	g_global.stop_here_doc = 0;
-	g_global.in_here_doc = 1;
+	infos->stop_here_doc = 0;
+	infos->in_here_doc = 1;
 	exit_code = display_here_doc(hd_infos, quotes, infos, filename);
-	g_global.in_here_doc = 0;
+	infos->in_here_doc = 0;
+	g_signal_error = 1;
 	infos->here_doc = 1;
 	return (exit_code);
 }
@@ -103,7 +106,7 @@ int	check_here_doc(t_infos *infos, t_cmds_infos *cmd)
 			exit_code = here_doc(infos, cmd->redir, cmd->hd_filename);
 			if (exit_code)
 			{
-				g_global.error_num = 1;
+				infos->error_num = 1;
 				return (reset_infos(infos));
 			}
 		}

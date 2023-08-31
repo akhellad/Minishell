@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 21:41:42 by akhellad          #+#    #+#             */
-/*   Updated: 2023/08/21 14:09:23 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/08/31 02:52:11 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,17 @@ int	event_hook(void)
 void	signal_handler(int signum)
 {
 	(void)signum;
-	if (!g_global.in_here_doc)
+	if (g_signal_error == 1)
 		ft_putstr_fd("\n", STDERR_FILENO);
-	if (g_global.in_cmd)
+	if (g_signal_error == 2)
 	{
-		g_global.stop_here_doc = 1;
+		g_signal_error = 3;
 		rl_replace_line("", 0);
 		rl_redisplay();
 		rl_done = 1;
 		return ;
 	}
+	printf("%d\n", g_signal_error);
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();

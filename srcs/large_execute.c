@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   large_execute.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agaley <agaley@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 04:42:49 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/28 00:21:54 by agaley           ###   ########lyon.fr   */
+/*   Updated: 2023/08/31 02:01:02 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	ft_fork(t_infos *infos, int end[2], int in_fd, t_cmds_infos *cmd)
 	return (0);
 }
 
-int	wait_all(int *pid, int nbr)
+int	wait_all(int *pid, int nbr, t_infos *infos)
 {
 	int	i;
 	int	status;
@@ -57,7 +57,7 @@ int	wait_all(int *pid, int nbr)
 	}
 	waitpid(pid[i], &status, 0);
 	if (WIFEXITED(status))
-		g_global.error_num = WEXITSTATUS(status);
+		infos->error_num = WEXITSTATUS(status);
 	return (0);
 }
 
@@ -98,7 +98,7 @@ int	large_execute(t_infos *infos)
 		else
 			break ;
 	}
-	wait_all(infos->pid, infos->pipes);
+	wait_all(infos->pid, infos->pipes, infos);
 	infos->cmds_infos = ft_cmds_infosfirst(infos->cmds_infos);
 	return (0);
 }

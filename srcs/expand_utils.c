@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 21:34:34 by akhellad          #+#    #+#             */
-/*   Updated: 2023/08/24 19:05:12 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/08/31 02:01:35 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,10 @@ int	check_digit(int j, char *str)
 	return (j - i);
 }
 
-int	handle_question(char **tmp)
+int	handle_question(char **tmp, t_infos *infos)
 {
 	free(*tmp);
-	*tmp = ft_itoa(g_global.error_num);
+	*tmp = ft_itoa(infos->error_num);
 	return (ft_strlen(*tmp) + 1);
 }
 

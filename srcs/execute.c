@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 03:00:03 by akhellad          #+#    #+#             */
-/*   Updated: 2023/08/21 13:59:12 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/08/31 01:53:26 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	one_cmd(t_cmds_infos *cmd, t_infos *infos)
 		|| cmd->builtins == unset_built || cmd->builtins == echo_built \
 		|| cmd->builtins == export_built)
 	{
-		g_global.error_num = cmd->builtins(infos, cmd);
+		infos->error_num = cmd->builtins(infos, cmd);
 		return ;
 	}
 	check_here_doc(infos, cmd);
@@ -79,5 +79,5 @@ void	one_cmd(t_cmds_infos *cmd, t_infos *infos)
 		sort_cmd(cmd, infos);
 	waitpid(pid, &status, 0);
 	if (WIFEXITED(status))
-		g_global.error_num = WEXITSTATUS(status);
+		infos->error_num = WEXITSTATUS(status);
 }

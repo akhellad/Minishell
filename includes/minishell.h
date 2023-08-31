@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 01:41:30 by akhellad          #+#    #+#             */
-/*   Updated: 2023/08/27 15:05:20 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/08/31 02:51:55 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,10 @@ typedef struct s_infos
 	char				*pwd;
 	char				*old_pwd;
 	int					export_var;
+	int					in_cmd;
+	int					in_here_doc;
+	int					stop_here_doc;
+	int					error_num;
 }		t_infos;
 
 typedef struct s_parser_infos
@@ -78,15 +82,7 @@ typedef struct s_cmds_infos
 	struct s_cmds_infos	*prev;
 }	t_cmds_infos;
 
-typedef struct s_g_global
-{
-	int				in_cmd;
-	int				in_here_doc;
-	int				stop_here_doc;
-	int				error_num;
-}	t_g_global;
-
-extern t_g_global	g_global;
+extern int	g_signal_error;
 int	(*init_builtins(char *str))(t_infos *infos, t_cmds_infos *cmds_infos);
 
 /* Error codes */
@@ -189,7 +185,7 @@ void			ft_cmdsinfo_clear(t_cmds_infos **lst);
 
 /*expand_utils.c*/
 char			*char_to_str(char c);
-int				handle_question(char **tmp);
+int				handle_question(char **tmp, t_infos *infos);
 int				check_digit(int j, char *str);
 int				expand_lengh(char *str, int j);
 size_t			find_equal(char *str);
@@ -206,6 +202,7 @@ int				exit_built(t_infos *infos, t_cmds_infos *cmd_infos);
 
 /*signals.c*/
 void			signal_init(void);
+void			check_error_signal(t_infos *infos);
 
 /*unset_built.c*/
 int				unset_built(t_infos *infos, t_cmds_infos *cmd_infos);
