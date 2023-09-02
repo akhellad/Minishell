@@ -6,13 +6,13 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 23:22:21 by akhellad          #+#    #+#             */
-/*   Updated: 2023/08/31 02:52:47 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/09/03 00:40:43 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	g_signal_error;
+int	g_signal_error = 1;
 
 int	display_here_doc(t_lexer *hd_infos, int quotes, t_infos *infos, \
 					char *filename)
@@ -67,7 +67,7 @@ int	here_doc(t_infos *infos, t_lexer *hd_infos, char *filename)
 		quotes = 1;
 	else
 		quotes = 0;
-	hd_infos->arg = handle_quotes(hd_infos->arg);
+	handle_quotes(&hd_infos->arg);
 	infos->stop_here_doc = 0;
 	infos->in_here_doc = 1;
 	exit_code = display_here_doc(hd_infos, quotes, infos, filename);

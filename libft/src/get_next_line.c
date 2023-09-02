@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 07:05:20 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/22 03:07:07 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/09/02 23:36:46 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ char	*ft_free(char *buffer, char *buf)
 	char	*temp;
 
 	temp = ft_strjoin(buffer, buf);
-	free(buffer);
+	if (buffer)
+		free(buffer);
 	return (temp);
 }
 
@@ -39,13 +40,15 @@ char	*ft_read(int fd, char *stash)
 		nbytes = read(fd, buffer, BUFFER_SIZE);
 		if (nbytes == -1)
 		{
-			free(buffer);
+			if (buffer)
+				free(buffer);
 			return (NULL);
 		}
 		buffer[nbytes] = 0;
 		stash = ft_free(stash, buffer);
 	}
-	free (buffer);
+	if (buffer)
+		free(buffer);
 	return (stash);
 }
 

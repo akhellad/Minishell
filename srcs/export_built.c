@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 22:10:45 by akhellad          #+#    #+#             */
-/*   Updated: 2023/08/27 14:37:59 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/09/03 00:45:08 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	variable_exist(t_infos *infos, char *str)
 
 	i = 0;
 	if (str[find_equal(str)] == '\"' || str[find_equal(str)] == '\'')
-		str = handle_quotes(str);
+		handle_quotes(&str);
 	while (infos->envp[i])
 	{
 		if (ft_strncmp(infos->envp[i],
@@ -81,8 +81,7 @@ char	**add_var(char **arr, char *str)
 	size_t	i;
 
 	i = 0;
-	if (str[find_equal(str)] == '\"' || str[find_equal(str)] == '\'')
-		str = handle_quotes(str);
+	handle_quotes(&str);
 	while (arr[i] != NULL)
 		i++;
 	rtn = ft_calloc(sizeof(char *), i + 2);
@@ -98,12 +97,12 @@ int	export_built(t_infos *infos, t_cmds_infos *s_cmds_infos)
 	char	**tmp;
 	int		i;
 
-	i = 1;
+	i = 0;
 	if (!s_cmds_infos->str[1] || s_cmds_infos->str[1][0] == '\0')
 		solo_export(infos);
 	else
 	{
-		while (s_cmds_infos->str[i])
+		while (s_cmds_infos->str[++i])
 		{
 			if (check_parameter(s_cmds_infos->str[i]) == 0
 				&& variable_exist(infos, s_cmds_infos->str[i]) == 0)
@@ -115,7 +114,8 @@ int	export_built(t_infos *infos, t_cmds_infos *s_cmds_infos)
 					infos->envp = tmp;
 				}
 			}
-			i++;
+			else
+				return (EXIT_FAILURE);
 		}
 	}
 	return (EXIT_SUCCESS);

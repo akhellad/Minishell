@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 05:00:41 by akhellad          #+#    #+#             */
-/*   Updated: 2023/08/31 02:01:48 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/09/03 00:40:20 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ char	*handle_dollar(t_infos *infos, char *str)
 	{
 		j += check_digit(j, str);
 		if (str[j] == '$' && str[j + 1] == '?')
-			j += handle_question(&tmp, infos);
+			j += handle_question(&tmp, infos) + 1;
 		else if (str[j] == '$' && (str[j + 1] != ' ' && (str[j + 1] != '"' \
 				|| str[j + 2] != '\0')) && str[j + 1] != '\0')
 			j += dollar_loop(infos, str, &tmp, j);
@@ -93,7 +93,7 @@ char	**expand(t_infos *infos, char **str)
 	tmp = NULL;
 	while (str[++i] != NULL)
 	{
-		if (find_dollar(str[i]) != 0 && str[i][find_dollar(str[i]) - 2] != '\''
+		if (find_dollar(str[i]) != 0 && find_quote(str[i]) == 0
 			&& str[i][find_dollar(str[i])] != '\0')
 		{
 			tmp = handle_dollar(infos, str[i]);
@@ -103,7 +103,7 @@ char	**expand(t_infos *infos, char **str)
 		}
 		if (ft_strncmp(str[0], "export", ft_strlen(str[0]) - 1) != 0)
 		{
-			str[i] = handle_quotes(str[i]);
+			handle_quotes(&str[i]);
 		}
 	}
 	return (str);

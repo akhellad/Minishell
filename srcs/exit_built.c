@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 21:34:55 by akhellad          #+#    #+#             */
-/*   Updated: 2023/08/22 09:30:05 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/09/02 23:40:44 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	is_str_digit(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == '-')
+		if (str[i] == '-' || str[i] == '+')
 			i++;
 		if (!ft_isdigit(str[i]))
 			return (0);
@@ -52,7 +52,7 @@ void	find_exit_code(char **str)
 	{
 		ft_putstr_fd(str[1], STDERR_FILENO);
 		ft_putstr_fd(": numeric argument required\n", STDERR_FILENO);
-		exit_code = 255;
+		exit_code = 2;
 	}
 	free_arr(str);
 	ft_putendl_fd("exit", 2);

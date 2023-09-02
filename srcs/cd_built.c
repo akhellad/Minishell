@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 23:48:52 by akhellad          #+#    #+#             */
-/*   Updated: 2023/08/22 09:43:19 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/09/03 00:01:43 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,17 @@ void	update_path(t_infos *infos)
 	tmp = malloc(sizeof(char) * PATH_MAX);
 	if (!tmp)
 		return ;
-	free(infos->old_pwd);
+	if (infos->old_pwd)
+		free(infos->old_pwd);
 	infos->old_pwd = ft_strdup(infos->pwd);
 	if (getcwd(tmp, PATH_MAX))
 	{
-		free(infos->pwd);
+		if (infos->pwd)
+			free(infos->pwd);
 		infos->pwd = ft_strdup(tmp);
 	}
-	free(tmp);
+	if (tmp)
+		free(tmp);
 }
 
 char	*find_equal_path(char *str, t_infos *infos)
@@ -90,6 +93,11 @@ int	cd_built(t_infos *infos, t_cmds_infos *cmd_infos)
 {
 	int	i;
 
+	if (cmd_infos->str[1] && cmd_infos->str[2])
+	{
+		ft_putendl_fd("cd: too many arguments", 2);
+		return (1);
+	}
 	if (!cmd_infos->str[1])
 		i = preset_path(infos, "HOME=");
 	else

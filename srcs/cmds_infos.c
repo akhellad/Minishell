@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 07:23:43 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/28 02:07:24 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/09/02 21:44:58 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ void	ft_cmdsinfo_clear(t_cmds_infos **lst)
 	{
 		tmp = (*lst)->next;
 		redir_tmp = (*lst)->redir;
-		ft_clearlexer(&redir_tmp);
+		if (redir_tmp)
+			ft_clearlexer(&redir_tmp);
 		if ((*lst)->str)
 			free_arr((*lst)->str);
 		if ((*lst)->hd_filename)
