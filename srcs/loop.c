@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agaley <agaley@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 18:19:13 by akhellad          #+#    #+#             */
-/*   Updated: 2023/08/31 02:52:29 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/09/05 01:54:28 by agaley           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	free_resources(t_infos *infos)
 	i = 0;
 	if (infos->envp)
 	{
-		while (infos->envp[i]) 
+		while (infos->envp[i])
 		{
 			free(infos->envp[i]);
 			i++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agaley <agaley@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 05:59:08 by akhellad          #+#    #+#             */
-/*   Updated: 2023/08/27 15:07:45 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/09/05 01:53:57 by agaley           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,11 @@ char	*handle_quotes(char *arg)
 	i = 0;
 	output_index = 0;
 	final_arg = ft_strdup(arg);
-	while (arg[i] != '\0') 
+	while (arg[i] != '\0')
 	{
 		while (arg[i] != '\'' && arg[i] != '"' && arg[i] != '\0')
 			final_arg[output_index++] = arg[i++];
-		if (arg[i] == '\'' || arg[i] == '"') 
+		if (arg[i] == '\'' || arg[i] == '"')
 		{
 			quote_type = arg[i];
 			i++;
