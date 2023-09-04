@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agaley <agaley@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 09:13:07 by akhellad          #+#    #+#             */
-/*   Updated: 2023/08/22 07:09:35 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/09/05 01:40:38 by agaley           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	export_err(char *c)
 	{
 		ft_putchar_fd('\'', STDERR_FILENO);
 		ft_putstr_fd(c, STDERR_FILENO);
-		ft_putstr_fd("\': is ", STDERR_FILENO);
+		ft_putstr_fd("\': ", STDERR_FILENO);
 	}
 	ft_putendl_fd("not a valid identifier", STDERR_FILENO);
 	return (EXIT_FAILURE);
