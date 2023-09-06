@@ -3,20 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agaley <agaley@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 03:00:03 by akhellad          #+#    #+#             */
-/*   Updated: 2023/09/03 00:56:41 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/09/07 00:57:12 by agaley           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	cmd_not_found(char *str)
+static int	exec_error(char *str)
 {
+	DIR	*dir;
+	int	fd;
+	int	value;
+
+	fd = open(str, O_WRONLY);
+	dir = opendir(str);
 	ft_putstr_fd(str, STDERR_FILENO);
-	ft_putstr_fd(": command not found\n", STDERR_FILENO);
-	return (127);
+	if (!ft_strchr(str, '/'))
+		ft_putendl_fd(": command not found", STDERR_FILENO);
+	else if (fd == -1 && !dir)
+		ft_putendl_fd(": No such file or directory", STDERR_FILENO);
+	else if (fd == -1 && dir)
+		ft_putendl_fd(": Is a directory", STDERR_FILENO);
+	else if (fd != -1 && !dir)
+		ft_putendl_fd(": Permission denied", STDERR_FILENO);
+	if (!ft_strchr(str, '/') || (fd == -1 && !dir))
+		value = 127;
+	else
+		value = 126;
+	if (dir)
+		closedir(dir);
+	if (fd > 0)
+		close(fd);
+	return (value);
 }
 
 int	execute(t_cmds_infos *cmd, t_infos *infos)
@@ -36,7 +57,7 @@ int	execute(t_cmds_infos *cmd, t_infos *infos)
 		free(final_cmd);
 		i ++;
 	}
-	return (cmd_not_found(cmd->str[0]));
+	return (exec_error(cmd->str[0]));
 }
 
 void	sort_cmd(t_cmds_infos *cmd, t_infos *infos)

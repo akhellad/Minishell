@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexers_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agaley <agaley@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 05:56:46 by akhellad          #+#    #+#             */
-/*   Updated: 2023/09/02 21:37:34 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/09/07 00:56:29 by agaley           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ char	*handle_incomplete_command(char *input)
 	{
 		new_input = readline("\033[34m> \033[0m");
 		if (!new_input)
-			return (NULL); 
+			return (NULL);
 		tmp = ft_strjoin(input, new_input);
 		free(input);
 		free(new_input);
