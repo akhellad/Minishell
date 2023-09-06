@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 08:27:11 by akhellad          #+#    #+#             */
-/*   Updated: 2023/06/01 15:20:46 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/09/02 21:14:01 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ char	**ft_malloc_error(char **tab)
 		free(tab[i]);
 		i++;
 	}
-	free(tab);
+	if (tab)
+		free(tab);
 	return (NULL);
 }
 

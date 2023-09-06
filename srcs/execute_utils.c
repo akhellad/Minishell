@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 05:55:05 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/25 22:38:29 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/09/03 00:57:24 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,25 @@ char	**resplit_str(char **double_arr)
 	ret = ft_split(joined_str, ' ');
 	free(joined_str);
 	return (ret);
+}
+
+int	one_cmd_bultin(t_infos *infos, int fd_in, int fd_out, t_cmds_infos *cmd)
+{
+	if (cmd->redir)
+	{
+		if (init_redirs(cmd))
+		{
+			dup2(fd_in, STDIN_FILENO);
+			dup2(fd_out, STDOUT_FILENO);
+			close(fd_in);
+			close(fd_out);
+			return (1);
+		}
+	}
+	infos->error_num = cmd->builtins(infos, cmd);
+	dup2(fd_in, STDIN_FILENO);
+	dup2(fd_out, STDOUT_FILENO);
+	close(fd_in);
+	close(fd_out);
+	return (infos->error_num);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_files.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: agaley <agaley@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 22:05:56 by akhellad          #+#    #+#             */
-/*   Updated: 2023/07/28 02:00:53 by agaley           ###   ########lyon.fr   */
+/*   Updated: 2023/09/03 00:40:06 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int	init_redirs(t_cmds_infos *cmd)
 	start = cmd->redir;
 	while (cmd->redir)
 	{
+		handle_quotes(&cmd->redir->arg);
 		if (cmd->redir->token == LESS)
 		{
 			if (init_infile(cmd->redir->arg))

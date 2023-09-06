@@ -16,7 +16,8 @@ t_lexer	*ft_clearlexer_one(t_lexer **lexers)
 {
 	if ((*lexers)->arg)
 	{
-		free((*lexers)->arg);
+		if ((*lexers)->arg)
+			free((*lexers)->arg);
 		(*lexers)->arg = NULL;
 	}
 	free(*lexers);
@@ -74,7 +75,8 @@ void	ft_clearlexer(t_lexer **lexers)
 		tmp = (*lexers)->next;
 		if ((*lexers)->arg)
 			free((*lexers)->arg);
-		free(*lexers);
+		if (lexers)
+			free(*lexers);
 		*lexers = tmp;
 	}
 	*lexers = NULL;

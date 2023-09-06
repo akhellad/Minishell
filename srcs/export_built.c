@@ -6,7 +6,7 @@
 /*   By: agaley <agaley@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 22:10:45 by akhellad          #+#    #+#             */
-/*   Updated: 2023/09/05 01:50:41 by agaley           ###   ########lyon.fr   */
+/*   Updated: 2023/09/07 00:59:52 by agaley           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	variable_exist(t_infos *infos, char *str)
 
 	i = 0;
 	if (str[find_equal(str)] == '\"' || str[find_equal(str)] == '\'')
-		str = handle_quotes(str);
+		handle_quotes(&str);
 	while (infos->envp[i])
 	{
 		if (ft_strncmp(infos->envp[i],
@@ -81,8 +81,7 @@ char	**add_var(char **arr, char *str)
 	size_t	i;
 
 	i = 0;
-	if (str[find_equal(str)] == '\"' || str[find_equal(str)] == '\'')
-		str = handle_quotes(str);
+	handle_quotes(&str);
 	while (arr[i] != NULL)
 		i++;
 	rtn = ft_calloc(sizeof(char *), i + 2);
@@ -99,7 +98,7 @@ int	export_built(t_infos *infos, t_cmds_infos *s_cmds_infos)
 	int		i;
 	int		check;
 
-	i = 1;
+	i = 0;
 	if (!s_cmds_infos->str[1] || s_cmds_infos->str[1][0] == '\0')
 		solo_export(infos);
 	while (s_cmds_infos->str[1] && s_cmds_infos->str[1][0] != '\0'

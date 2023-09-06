@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 04:54:35 by akhellad          #+#    #+#             */
-/*   Updated: 2023/08/24 20:06:02 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/09/02 23:41:22 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,11 @@ int	env_built(t_infos *infos, t_cmds_infos *cmd_infos)
 {
 	int	i;
 
-	(void)cmd_infos;
+	if (cmd_infos->redir)
+	{
+		if (init_redirs(cmd_infos))
+			return (1);
+	}
 	i = 0;
 	while (infos->envp[i])
 	{

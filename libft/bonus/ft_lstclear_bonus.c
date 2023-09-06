@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 20:19:39 by akhellad          #+#    #+#             */
-/*   Updated: 2023/02/15 18:24:21 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/09/02 21:13:36 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ void	ft_lstclear(t_list **lst, void (*del)(void *))
 		{
 			del(new -> content);
 			buff = new->next;
-			free(new);
+			if (new)
+				free(new);
 			new = buff;
 		}
 	}

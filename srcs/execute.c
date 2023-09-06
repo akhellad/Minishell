@@ -6,7 +6,7 @@
 /*   By: agaley <agaley@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 03:00:03 by akhellad          #+#    #+#             */
-/*   Updated: 2023/09/07 00:36:56 by agaley           ###   ########lyon.fr   */
+/*   Updated: 2023/09/07 00:57:12 by agaley           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,16 +82,18 @@ void	one_cmd(t_cmds_infos *cmd, t_infos *infos)
 {
 	int	pid;
 	int	status;
+	int	fd[2];
 
+	fd[0] = dup(STDIN_FILENO);
+	fd[1] = dup(STDOUT_FILENO);
 	infos->cmds_infos = call_expand(infos, infos->cmds_infos);
-	if (cmd->builtins == cd_built || cmd->builtins == env_built \
-		|| cmd->builtins == pwd_built || cmd->builtins == exit_built \
-		|| cmd->builtins == unset_built || cmd->builtins == echo_built \
-		|| cmd->builtins == export_built)
+	if (cmd->builtins != NULL)
 	{
-		infos->error_num = cmd->builtins(infos, cmd);
+		infos->error_num = one_cmd_bultin(infos, fd[0], fd[1], cmd);
 		return ;
 	}
+	close(fd[0]);
+	close(fd[1]);
 	check_here_doc(infos, cmd);
 	pid = fork();
 	if (pid < 0)

@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 21:34:34 by akhellad          #+#    #+#             */
-/*   Updated: 2023/08/31 02:01:35 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/09/02 23:48:16 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,12 @@ int	check_digit(int j, char *str)
 
 int	handle_question(char **tmp, t_infos *infos)
 {
+	char	*new_tmp;
+
+	new_tmp = ft_strjoin(*tmp, ft_itoa(infos->error_num));
 	free(*tmp);
-	*tmp = ft_itoa(infos->error_num);
-	return (ft_strlen(*tmp) + 1);
+	*tmp = new_tmp;
+	return (ft_strlen(ft_itoa(infos->error_num)));
 }
 
 char	*char_to_str(char c)

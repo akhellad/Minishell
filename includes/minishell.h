@@ -6,7 +6,7 @@
 /*   By: agaley <agaley@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 01:41:30 by akhellad          #+#    #+#             */
-/*   Updated: 2023/09/07 00:38:06 by agaley           ###   ########lyon.fr   */
+/*   Updated: 2023/09/07 00:57:40 by agaley           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +160,8 @@ int				large_execute(t_infos *infos);
 
 /*execute_utils.c*/
 char			**resplit_str(char **double_arr);
+int				one_cmd_bultin(t_infos *infos, int fd_in, int fd_out, \
+								t_cmds_infos *cmd);
 
 /*lexers_utils.c*/
 t_lexer			*ft_newlexer(char *str, int token);
@@ -171,9 +173,9 @@ int				handle_partial_command(t_infos *infos);
 int				check_quotes(char *str);
 int				check_double_quotes(char *str, int i, int *quotes_nbr, \
 									int quotes);
-char			*del_quotes(char *str, char c, int *p);
 int				quotes(int i, char *str, char del);
-char			*handle_quotes(char *str);
+void			handle_quotes(char **str);
+int				find_quote(char *str);
 
 /*spaces.c*/
 int				skip_spaces(char *str, int i);
