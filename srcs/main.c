@@ -6,7 +6,7 @@
 /*   By: agaley <agaley@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 01:41:27 by akhellad          #+#    #+#             */
-/*   Updated: 2023/09/07 00:54:09 by agaley           ###   ########lyon.fr   */
+/*   Updated: 2023/09/07 02:19:41 by agaley           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	init_infos(t_infos *infos)
 	infos->in_cmd = 0;
 	infos->in_here_doc = 0;
 	set_path(infos);
-	// signal_init();
+	signal_init();
 	return (1);
 }
 
