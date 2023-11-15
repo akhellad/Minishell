@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset_built.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agaley <agaley@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 23:38:56 by akhellad          #+#    #+#             */
-/*   Updated: 2023/09/02 23:32:22 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/09/07 01:35:11 by agaley           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,6 @@ char	**unset_var(char **env, char *var)
 
 int	check_unset_error(t_cmds_infos *cmd_infos)
 {
-	if (!cmd_infos->str[1])
-		ft_putchar_fd('\n', STDERR_FILENO);
 	if (find_equal(cmd_infos->str[1]))
 	{
 		ft_putendl_fd("unset: invalid parameter name", STDERR_FILENO);
@@ -68,6 +66,11 @@ int	unset_built(t_infos *infos, t_cmds_infos *cmd_infos)
 {
 	char	**tmp;
 
+	if (!cmd_infos->str[1])
+	{
+		ft_putchar_fd('\n', STDERR_FILENO);
+		return (EXIT_SUCCESS);
+	}
 	if (check_unset_error(cmd_infos))
 		return (EXIT_FAILURE);
 	else

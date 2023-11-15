@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexers.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agaley <agaley@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 05:53:43 by akhellad          #+#    #+#             */
-/*   Updated: 2023/08/27 15:05:01 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/09/05 01:54:32 by agaley           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ t_tokens	is_token(int c)
 {
 	int			i;
 	static int	tokens[3][2] = {
-	{124, PIPE}, 
-	{62, GREAT}, 
+	{124, PIPE},
+	{62, GREAT},
 	{60, LESS}
 	};
 

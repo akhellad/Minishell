@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_built.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agaley <agaley@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 23:48:52 by akhellad          #+#    #+#             */
-/*   Updated: 2023/09/03 00:01:43 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/09/07 00:57:24 by agaley           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,11 @@ int	cd_built(t_infos *infos, t_cmds_infos *cmd_infos)
 		i = preset_path(infos, "HOME=");
 	else
 	{
+		if (cmd_infos->str[2])
+		{
+			ft_putendl_fd("cd: too many arguments", STDERR_FILENO);
+			return (EXIT_FAILURE);
+		}
 		i = chdir(cmd_infos->str[1]);
 		if (i != 0)
 		{
@@ -110,8 +115,8 @@ int	cd_built(t_infos *infos, t_cmds_infos *cmd_infos)
 		}
 	}
 	if (i != 0)
-		return (1);
+		return (EXIT_FAILURE);
 	update_path(infos);
 	update_env(infos);
-	return (0);
+	return (EXIT_SUCCESS);
 }

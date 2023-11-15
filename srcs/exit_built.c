@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_built.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agaley <agaley@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 21:34:55 by akhellad          #+#    #+#             */
-/*   Updated: 2023/09/02 23:40:44 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/09/07 00:56:54 by agaley           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	find_exit_code(char **str)
 		exit_code = 2;
 	}
 	free_arr(str);
-	ft_putendl_fd("exit", 2);
+	ft_putendl_fd("exit", STDOUT_FILENO);
 	exit(exit_code);
 }
 
@@ -65,7 +65,7 @@ int	exit_built(t_infos *infos, t_cmds_infos *cmd_infos)
 
 	if (cmd_infos->str[1] && cmd_infos->str[2])
 	{
-		ft_putendl_fd("exit: too many arguments", 2);
+		ft_putendl_fd("exit: too many arguments", STDERR_FILENO);
 		return (1);
 	}
 	str = ft_arrdup(cmd_infos->str);

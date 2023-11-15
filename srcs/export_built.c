@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_built.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
+/*   By: agaley <agaley@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 22:10:45 by akhellad          #+#    #+#             */
-/*   Updated: 2023/09/03 00:45:08 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/09/07 00:59:52 by agaley           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,27 +96,27 @@ int	export_built(t_infos *infos, t_cmds_infos *s_cmds_infos)
 {
 	char	**tmp;
 	int		i;
+	int		check;
 
 	i = 0;
 	if (!s_cmds_infos->str[1] || s_cmds_infos->str[1][0] == '\0')
 		solo_export(infos);
-	else
+	while (s_cmds_infos->str[1] && s_cmds_infos->str[1][0] != '\0'
+		&& s_cmds_infos->str[i])
 	{
-		while (s_cmds_infos->str[++i])
+		check = check_parameter(s_cmds_infos->str[i]);
+		if (check == 1)
+			return (EXIT_FAILURE);
+		else if (variable_exist(infos, s_cmds_infos->str[i]) == 0)
 		{
-			if (check_parameter(s_cmds_infos->str[i]) == 0
-				&& variable_exist(infos, s_cmds_infos->str[i]) == 0)
+			if (s_cmds_infos->str[i])
 			{
-				if (s_cmds_infos->str[i])
-				{
-					tmp = add_var(infos->envp, s_cmds_infos->str[i]);
-					free_arr(infos->envp);
-					infos->envp = tmp;
-				}
+				tmp = add_var(infos->envp, s_cmds_infos->str[i]);
+				free_arr(infos->envp);
+				infos->envp = tmp;
 			}
-			else
-				return (EXIT_FAILURE);
 		}
+		i++;
 	}
 	return (EXIT_SUCCESS);
 }

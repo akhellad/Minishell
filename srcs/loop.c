@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 18:19:13 by akhellad          #+#    #+#             */
-/*   Updated: 2023/11/15 17:46:38 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/11/15 19:07:15 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	free_resources(t_infos *infos)
 	i = 0;
 	if (infos->envp)
 	{
-		while (infos->envp[i]) 
+		while (infos->envp[i])
 		{
 			free(infos->envp[i]);
 			i++;

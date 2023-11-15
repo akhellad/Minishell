@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 01:41:30 by akhellad          #+#    #+#             */
-/*   Updated: 2023/11/15 12:55:16 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/11/15 19:04:49 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 # include <errno.h>
 # include <signal.h>
 # include <stdbool.h>
+# include <sys/types.h>
+# include <dirent.h>
 
 typedef enum s_tokens
 {
