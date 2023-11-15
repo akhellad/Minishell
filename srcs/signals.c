@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 21:41:42 by akhellad          #+#    #+#             */
-/*   Updated: 2023/09/03 00:29:44 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/11/15 18:21:34 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	signal_handler(int signum)
 	if (g_signal_error == 2)
 	{
 		g_signal_error = 3;
+		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
 		rl_done = 1;

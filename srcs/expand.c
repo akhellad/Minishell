@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 05:00:41 by akhellad          #+#    #+#             */
-/*   Updated: 2023/09/03 00:40:20 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/11/15 12:42:21 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,27 +59,23 @@ char	*handle_dollar(t_infos *infos, char *str)
 {
 	int		j;
 	char	*tmp;
-	char	*tmp2;
-	char	*tmp3;
+	int		q_type;
 
 	j = 0;
-	tmp = ft_strdup("\0");
+	tmp = ft_strdup("");
 	while (str[j])
 	{
-		j += check_digit(j, str);
-		if (str[j] == '$' && str[j + 1] == '?')
-			j += handle_question(&tmp, infos) + 1;
-		else if (str[j] == '$' && (str[j + 1] != ' ' && (str[j + 1] != '"' \
-				|| str[j + 2] != '\0')) && str[j + 1] != '\0')
-			j += dollar_loop(infos, str, &tmp, j);
-		else
+		q_type = quote_type(str, j);
+		if (str[j] == '$' && is_valid_variable_char(str[j + 1]) && \
+			(q_type != 1 || q_type == 2))
 		{
-			tmp2 = char_to_str(str[j++]);
-			tmp3 = ft_strjoin(tmp, tmp2);
-			free(tmp);
-			tmp = tmp3;
-			free (tmp2);
+			if (str[j + 1] == '?') 
+				j += handle_question(&tmp, infos) + 1;
+			else
+				j += dollar_loop(infos, str, &tmp, j);
 		}
+		else
+			tmp = append_char(tmp, str[j++]);
 	}
 	return (tmp);
 }
@@ -93,8 +89,7 @@ char	**expand(t_infos *infos, char **str)
 	tmp = NULL;
 	while (str[++i] != NULL)
 	{
-		if (find_dollar(str[i]) != 0 && find_quote(str[i]) == 0
-			&& str[i][find_dollar(str[i])] != '\0')
+		if (find_dollar(str[i]) != 0 && str[i][find_dollar(str[i])] != '\0')
 		{
 			tmp = handle_dollar(infos, str[i]);
 			free (str[i]);

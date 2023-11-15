@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 04:42:49 by akhellad          #+#    #+#             */
-/*   Updated: 2023/08/31 02:01:02 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/11/15 18:42:46 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int	large_execute(t_infos *infos)
 		if (infos->cmds_infos->prev)
 			close(in_fd);
 		in_fd = check_fd_heredoc(infos, end, infos->cmds_infos);
-		if (infos->cmds_infos->next)
+		if (infos->cmds_infos->next && g_signal_error != 3)
 			infos->cmds_infos = infos->cmds_infos->next;
 		else
 			break ;

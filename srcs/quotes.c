@@ -6,25 +6,11 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 05:59:08 by akhellad          #+#    #+#             */
-/*   Updated: 2023/09/03 00:57:55 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/11/15 18:26:40 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-int	find_quote(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == '\'')
-			return (1);
-		i++;
-	}
-	return (0);
-}
 
 int	check_double_quotes(char *str, int i, int *quotes_nbr, int quotes)
 {
@@ -81,21 +67,21 @@ void	handle_quotes(char **arg)
 	int		i;
 	char	quote_type;
 
-	i = 0;
 	output_index = 0;
+	quote_type = 0;
+	i = 0;
 	while ((*arg)[i] != '\0')
 	{
-		while ((*arg)[i] != '\0' && (*arg)[i] != '\'' && (*arg)[i] != '"')
-			(*arg)[output_index++] = (*arg)[i++];
-		if ((*arg)[i] && ((*arg)[i] == '\'' || (*arg)[i] == '"'))
+		if ((*arg)[i] == '\'' || (*arg)[i] == '"')
 		{
-			quote_type = (*arg)[i];
-			i++;
+			quote_type = (*arg)[i++];
 			while ((*arg)[i] != '\0' && (*arg)[i] != quote_type)
 				(*arg)[output_index++] = (*arg)[i++];
-			if ((*arg)[i] && (*arg)[i] == quote_type)
+			if ((*arg)[i] == quote_type)
 				i++;
 		}
+		else
+			(*arg)[output_index++] = (*arg)[i++];
 	}
 	(*arg)[output_index] = '\0';
 }

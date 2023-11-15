@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 23:22:21 by akhellad          #+#    #+#             */
-/*   Updated: 2023/09/03 00:40:43 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/11/15 18:39:30 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@ int	display_here_doc(t_lexer *hd_infos, int quotes, t_infos *infos, \
 	char	*arg;
 
 	fd = open(filename, O_CREAT | O_RDWR | O_TRUNC, 0664);
+	if (infos->stop_here_doc)
+	{
+		close(fd);
+		return (0);
+	}
 	arg = readline("\033[1;34m> \033[0m");
 	while (arg && ft_strncmp(hd_infos->arg, arg, ft_strlen(hd_infos->arg)) \
 			&& g_signal_error != 3)
@@ -33,7 +38,7 @@ int	display_here_doc(t_lexer *hd_infos, int quotes, t_infos *infos, \
 		arg = readline("\033[1;34m> \033[0m");
 	}
 	free(arg);
-	if (infos->stop_here_doc || !arg)
+	if (!arg)
 		return (1);
 	close(fd);
 	return (0);
@@ -47,7 +52,15 @@ int	check_fd_heredoc(t_infos *infos, int end[2], t_cmds_infos *cmd)
 	{
 		close(end[0]);
 		if (cmd->hd_filename)
+		{
 			in_fd = open(cmd->hd_filename, O_RDONLY);
+			if (in_fd == -1)
+			{
+				infos->error_num = 1;
+				return (reset_infos(infos));
+			}
+		}
+		infos->here_doc = 0;
 	}
 	else
 		in_fd = end[0];
@@ -68,11 +81,12 @@ int	here_doc(t_infos *infos, t_lexer *hd_infos, char *filename)
 	else
 		quotes = 0;
 	handle_quotes(&hd_infos->arg);
-	infos->stop_here_doc = 0;
 	infos->in_here_doc = 1;
 	exit_code = display_here_doc(hd_infos, quotes, infos, filename);
+	if (g_signal_error == 3)
+		infos->stop_here_doc = 1;
 	infos->in_here_doc = 0;
-	g_signal_error = 1;
+	g_signal_error = 2;
 	infos->here_doc = 1;
 	return (exit_code);
 }

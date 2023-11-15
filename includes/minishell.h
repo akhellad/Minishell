@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 01:41:30 by akhellad          #+#    #+#             */
-/*   Updated: 2023/09/03 00:44:15 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/11/15 12:55:16 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,7 +173,6 @@ int				check_double_quotes(char *str, int i, int *quotes_nbr, \
 									int quotes);
 int				quotes(int i, char *str, char del);
 void			handle_quotes(char **str);
-int				find_quote(char *str);
 
 /*spaces.c*/
 int				skip_spaces(char *str, int i);
@@ -219,4 +218,8 @@ int				export_built(t_infos *infos, t_cmds_infos *cmds_infos);
 void			solo_export(t_infos *infos);
 int				check_valid_identifier(char c);
 
+/*quotes_utils.c*/
+char			*append_char(char *str, char c);
+int				is_valid_variable_char(char c);
+int				quote_type(char *str, int index);
 #endif
