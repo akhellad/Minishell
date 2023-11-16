@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 12:40:02 by akhellad          #+#    #+#             */
-/*   Updated: 2023/11/15 12:41:41 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/11/16 10:32:08 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ int	quote_type(char *str, int index)
 			double_quote = !double_quote;
 		i++;
 	}
-	if (single_quote) 
+	if (single_quote)
 		return (1);
-	if (double_quote) 
+	if (double_quote)
 		return (2);
 	return (0);
 }

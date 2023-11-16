@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 04:42:49 by akhellad          #+#    #+#             */
-/*   Updated: 2023/11/15 18:42:46 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/11/16 09:37:35 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ int	large_execute(t_infos *infos)
 			break ;
 	}
 	wait_all(infos->pid, infos->pipes, infos);
+	close(in_fd);
 	infos->cmds_infos = ft_cmds_infosfirst(infos->cmds_infos);
 	return (0);
 }

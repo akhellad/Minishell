@@ -6,7 +6,7 @@
 /*   By: akhellad <akhellad@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 08:46:16 by akhellad          #+#    #+#             */
-/*   Updated: 2023/06/01 15:18:50 by akhellad         ###   ########.fr       */
+/*   Updated: 2023/11/16 10:33:54 by akhellad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ int	ft_atoi(const char *nptr)
 	nptr1 = (char *)nptr;
 	fin = 0;
 	neg = 1;
-	while (*nptr1 == ' ' || *nptr1 == '\f' || *nptr1 == '\n' || *nptr1 == '\r' \
-	|| *nptr1 == '\t' || *nptr1 == '\v')
+	while (*nptr1 == ' ' || *nptr1 == '\f' || *nptr1 == '\n' || \
+	*nptr1 == '\r' || *nptr1 == '\t' || *nptr1 == '\v')
 		nptr1 ++;
 	if (*nptr1 == '+')
 		nptr1 ++;
